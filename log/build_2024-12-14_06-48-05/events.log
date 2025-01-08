@@ -1,0 +1,384 @@
+[0.000000] (-) TimerEvent: {}
+[0.000848] (contact) JobQueued: {'identifier': 'contact', 'dependencies': OrderedDict()}
+[0.001020] (contact) JobStarted: {'identifier': 'contact'}
+[0.016403] (contact) JobProgress: {'identifier': 'contact', 'progress': 'cmake'}
+[0.018139] (contact) JobProgress: {'identifier': 'contact', 'progress': 'build'}
+[0.019541] (contact) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact', '--', '-j8', '-l8'], 'cwd': '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact', 'env': OrderedDict([('SUDO_GID', '1000'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('MAIL', '/var/mail/root'), ('LANGUAGE', 'en_US.UTF-8'), ('USER', 'root'), ('LC_TIME', 'en_US.UTF-8'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/lib:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs/lib:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs/lib:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs/lib:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs/lib:/root/.x-cmd.root/local/data/pkg/sphere/X/l/j/h/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/home/orangepi/GM/nuc/GMaster_project/src'), ('RANGER_LEVEL', '1'), ('___X_CMD_LOG_C_TF', ''), ('ROS_PYTHON_VERSION', '3'), ('___X_CMD_LOG_C_WARN', '\\033[1;33m'), ('LC_MONETARY', 'en_US.UTF-8'), ('COLORTERM', 'truecolor'), ('ESCDELAY', '25'), ('___X_CMD_LOG_C_ERROR', '\\033[1;31m'), ('COLCON_PREFIX_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/pubtx/install:/home/orangepi/GM/nuc/GMaster_project/src/contact/install:/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install:/home/orangepi/GM/nuc/GMaster_project/install'), ('SUDO_UID', '1000'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('___X_CMD_LOG_C_DEBUG', '\\033[2;35m'), ('TERM', 'xterm-256color'), ('BASH_SILENCE_DEPRECATION_WARNING', '1'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/root/.x-cmd.root/local/data/pkg/sphere/X/l/j/h/bin:/root/.x-cmd.root/bin:/root/.cargo/bin:/root/.x-cmd.root/local/data/pkg/sphere/X/tree.linux.arm64.0/miniconda/v3.10.0+23.9.0-0/bin:/root/.cargo/bin:/root/.cargo/bin:/opt/ros/humble/bin:/root/.x-cmd.root/local/data/pkg/sphere/X/tree.linux.arm64.0/miniconda/v3.10.0+23.9.0-0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/.fzf/bin:/root/.x-cmd.root/local/data/triarii/bin'), ('LC_ADDRESS', 'en_US.UTF-8'), ('DISPLAY', ':0.0'), ('LANG', 'zh_CN.UTF-8'), ('XDG_CURRENT_DESKTOP', 'XFCE'), ('LC_TELEPHONE', 'en_US.UTF-8'), ('XAUTHORITY', '/home/orangepi/.Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SUDO_COMMAND', '/usr/bin/su'), ('AMENT_PREFIX_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/pubtx/install/test_tx_pub:/home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact:/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs:/opt/ros/humble'), ('LC_MESSAGES', 'en_US.UTF-8'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_US.UTF-8'), ('SUDO_USER', 'orangepi'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'en_US.UTF-8'), ('LC_IDENTIFICATION', 'en_US.UTF-8'), ('PWD', '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact'), ('LC_ALL', 'zh_CN.UTF-8'), ('PYTHONPATH', '/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'en_US.UTF-8'), ('___X_CMD_LOG_C_INFO', '\\033[32m'), ('LC_PAPER', 'en_US.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/pubtx/install/test_tx_pub:/home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact:/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs:/opt/ros/humble')]), 'shell': False}
+[0.096908] (contact) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.099627] (-) TimerEvent: {}
+[0.199914] (-) TimerEvent: {}
+[0.300468] (-) TimerEvent: {}
+[0.330503] (contact) StdoutLine: {'line': b'-- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.371233] (contact) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.374240] (contact) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.381599] (contact) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.394153] (contact) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.400469] (-) TimerEvent: {}
+[0.409916] (contact) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.453874] (contact) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.455736] (contact) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.500604] (-) TimerEvent: {}
+[0.601085] (-) TimerEvent: {}
+[0.623975] (contact) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.697163] (contact) StdoutLine: {'line': b'-- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[0.701137] (-) TimerEvent: {}
+[0.736973] (contact) StdoutLine: {'line': b'-- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.764098] (contact) StdoutLine: {'line': b'-- Found sentry_msgs: 0.0.1 (/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/share/sentry_msgs/cmake)\n'}
+[0.801252] (-) TimerEvent: {}
+[0.901863] (-) TimerEvent: {}
+[0.967049] (contact) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.002008] (-) TimerEvent: {}
+[1.020011] (contact) StdoutLine: {'line': b'-- Generating done\n'}
+[1.044829] (contact) StdoutLine: {'line': b'-- Build files have been written to: /home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact\n'}
+[1.102454] (-) TimerEvent: {}
+[1.160663] (contact) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target serial\x1b[0m\n'}
+[1.202793] (-) TimerEvent: {}
+[1.208018] (contact) StdoutLine: {'line': b'[ 50%] Built target serial\n'}
+[1.239464] (contact) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target contact\x1b[0m\n'}
+[1.280091] (contact) StdoutLine: {'line': b'[ 62%] \x1b[32mBuilding CXX object CMakeFiles/contact.dir/src/Checksum.cpp.o\x1b[0m\n'}
+[1.288413] (contact) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/contact.dir/src/ContactNode.cpp.o\x1b[0m\n'}
+[1.302858] (-) TimerEvent: {}
+[1.314078] (contact) StderrLine: {'line': b'\x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/Checksum.cpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kunsigned char Crc8Checksum(unsigned char*, unsigned int, unsigned char)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[1.314690] (contact) StderrLine: {'line': b'\x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/Checksum.cpp:33:21:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kunsigned int\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[1.314809] (contact) StderrLine: {'line': b'   33 |   for (int i = 0; \x1b[01;35m\x1b[Ki < dwLength\x1b[m\x1b[K; i++) {\n'}
+[1.314883] (contact) StderrLine: {'line': b'      |                   \x1b[01;35m\x1b[K~~^~~~~~~~~~\x1b[m\x1b[K\n'}
+[1.314945] (contact) StderrLine: {'line': b'\x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/Checksum.cpp:31:42:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[KucCRC8\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[1.315014] (contact) StderrLine: {'line': b'   31 |                            \x1b[01;35m\x1b[Kunsigned char ucCRC8\x1b[m\x1b[K) {\n'}
+[1.315078] (contact) StderrLine: {'line': b'      |                            \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~~~~\x1b[m\x1b[K\n'}
+[1.403227] (-) TimerEvent: {}
+[1.504346] (-) TimerEvent: {}
+[1.605214] (-) TimerEvent: {}
+[1.706332] (-) TimerEvent: {}
+[1.807355] (-) TimerEvent: {}
+[1.908361] (-) TimerEvent: {}
+[2.009474] (-) TimerEvent: {}
+[2.110362] (-) TimerEvent: {}
+[2.211259] (-) TimerEvent: {}
+[2.312141] (-) TimerEvent: {}
+[2.381583] (contact) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/ContactNode.cpp:1\x1b[m\x1b[K:\n'}
+[2.381849] (contact) StderrLine: {'line': b'\x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/include/CommPort.h:33:3:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Ktypedef\x1b[m\x1b[K\xe2\x80\x99 was ignored in this declaration\n'}
+[2.381927] (contact) StderrLine: {'line': b'   33 |   \x1b[01;35m\x1b[Ktypedef\x1b[m\x1b[K struct ProjectileRx {\n'}
+[2.381992] (contact) StderrLine: {'line': b'      |   \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[2.412187] (-) TimerEvent: {}
+[2.512505] (-) TimerEvent: {}
+[2.612919] (-) TimerEvent: {}
+[2.713509] (-) TimerEvent: {}
+[2.814146] (-) TimerEvent: {}
+[2.914743] (-) TimerEvent: {}
+[3.015323] (-) TimerEvent: {}
+[3.115930] (-) TimerEvent: {}
+[3.216545] (-) TimerEvent: {}
+[3.317144] (-) TimerEvent: {}
+[3.417746] (-) TimerEvent: {}
+[3.518339] (-) TimerEvent: {}
+[3.618916] (-) TimerEvent: {}
+[3.719516] (-) TimerEvent: {}
+[3.820110] (-) TimerEvent: {}
+[3.920712] (-) TimerEvent: {}
+[4.021326] (-) TimerEvent: {}
+[4.121965] (-) TimerEvent: {}
+[4.222594] (-) TimerEvent: {}
+[4.323191] (-) TimerEvent: {}
+[4.423807] (-) TimerEvent: {}
+[4.524435] (-) TimerEvent: {}
+[4.625026] (-) TimerEvent: {}
+[4.725554] (-) TimerEvent: {}
+[4.826131] (-) TimerEvent: {}
+[4.926742] (-) TimerEvent: {}
+[5.027309] (-) TimerEvent: {}
+[5.127841] (-) TimerEvent: {}
+[5.228399] (-) TimerEvent: {}
+[5.328938] (-) TimerEvent: {}
+[5.429407] (-) TimerEvent: {}
+[5.529876] (-) TimerEvent: {}
+[5.630396] (-) TimerEvent: {}
+[5.730922] (-) TimerEvent: {}
+[5.831475] (-) TimerEvent: {}
+[5.932074] (-) TimerEvent: {}
+[6.032693] (-) TimerEvent: {}
+[6.133301] (-) TimerEvent: {}
+[6.191091] (contact) StderrLine: {'line': b'\x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/ContactNode.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid ContactNode::rx_timer_callback()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[6.191936] (contact) StderrLine: {'line': b'\x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/ContactNode.cpp:136:37:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Ktaking address of packed member of \xe2\x80\x98\x1b[01m\x1b[KCommPort::ProjectileRx\x1b[m\x1b[K\xe2\x80\x99 may result in an unaligned pointer value [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Waddress-of-packed-member\x07-Waddress-of-packed-member\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[6.192480] (contact) StderrLine: {'line': b'  136 |     auto enemy_hp = \x1b[01;35m\x1b[Kcomm.rx_struct_.enemy_hp\x1b[m\x1b[K;\n'}
+[6.192888] (contact) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~^~~~~~~~\x1b[m\x1b[K\n'}
+[6.198149] (contact) StderrLine: {'line': b'\x1b[01m\x1b[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/ContactNode.cpp:130:14:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Ktimestamp\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[6.200217] (contact) StderrLine: {'line': b'  130 |     uint32_t \x1b[01;35m\x1b[Ktimestamp\x1b[m\x1b[K = comm.rx_struct_.timestamp;\n'}
+[6.201041] (contact) StderrLine: {'line': b'      |              \x1b[01;35m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[6.233631] (-) TimerEvent: {}
+[6.334659] (-) TimerEvent: {}
+[6.435882] (-) TimerEvent: {}
+[6.537081] (-) TimerEvent: {}
+[6.638202] (-) TimerEvent: {}
+[6.739252] (-) TimerEvent: {}
+[6.840397] (-) TimerEvent: {}
+[6.941620] (-) TimerEvent: {}
+[7.042701] (-) TimerEvent: {}
+[7.143907] (-) TimerEvent: {}
+[7.245125] (-) TimerEvent: {}
+[7.346323] (-) TimerEvent: {}
+[7.447498] (-) TimerEvent: {}
+[7.548676] (-) TimerEvent: {}
+[7.649871] (-) TimerEvent: {}
+[7.750938] (-) TimerEvent: {}
+[7.852143] (-) TimerEvent: {}
+[7.953330] (-) TimerEvent: {}
+[8.054527] (-) TimerEvent: {}
+[8.155683] (-) TimerEvent: {}
+[8.256858] (-) TimerEvent: {}
+[8.358011] (-) TimerEvent: {}
+[8.459226] (-) TimerEvent: {}
+[8.560388] (-) TimerEvent: {}
+[8.661597] (-) TimerEvent: {}
+[8.762739] (-) TimerEvent: {}
+[8.863900] (-) TimerEvent: {}
+[8.965022] (-) TimerEvent: {}
+[9.066215] (-) TimerEvent: {}
+[9.167249] (-) TimerEvent: {}
+[9.268403] (-) TimerEvent: {}
+[9.369454] (-) TimerEvent: {}
+[9.470604] (-) TimerEvent: {}
+[9.571790] (-) TimerEvent: {}
+[9.673062] (-) TimerEvent: {}
+[9.774249] (-) TimerEvent: {}
+[9.875443] (-) TimerEvent: {}
+[9.976656] (-) TimerEvent: {}
+[10.077865] (-) TimerEvent: {}
+[10.179100] (-) TimerEvent: {}
+[10.280289] (-) TimerEvent: {}
+[10.381470] (-) TimerEvent: {}
+[10.482663] (-) TimerEvent: {}
+[10.583835] (-) TimerEvent: {}
+[10.685016] (-) TimerEvent: {}
+[10.786241] (-) TimerEvent: {}
+[10.887462] (-) TimerEvent: {}
+[10.988643] (-) TimerEvent: {}
+[11.089841] (-) TimerEvent: {}
+[11.190989] (-) TimerEvent: {}
+[11.292140] (-) TimerEvent: {}
+[11.393376] (-) TimerEvent: {}
+[11.494510] (-) TimerEvent: {}
+[11.595728] (-) TimerEvent: {}
+[11.696933] (-) TimerEvent: {}
+[11.798095] (-) TimerEvent: {}
+[11.899269] (-) TimerEvent: {}
+[12.000413] (-) TimerEvent: {}
+[12.101566] (-) TimerEvent: {}
+[12.202728] (-) TimerEvent: {}
+[12.303878] (-) TimerEvent: {}
+[12.405058] (-) TimerEvent: {}
+[12.506258] (-) TimerEvent: {}
+[12.607385] (-) TimerEvent: {}
+[12.708579] (-) TimerEvent: {}
+[12.809831] (-) TimerEvent: {}
+[12.911012] (-) TimerEvent: {}
+[13.012219] (-) TimerEvent: {}
+[13.113419] (-) TimerEvent: {}
+[13.214596] (-) TimerEvent: {}
+[13.315760] (-) TimerEvent: {}
+[13.416912] (-) TimerEvent: {}
+[13.518070] (-) TimerEvent: {}
+[13.619187] (-) TimerEvent: {}
+[13.720207] (-) TimerEvent: {}
+[13.821346] (-) TimerEvent: {}
+[13.922487] (-) TimerEvent: {}
+[14.023671] (-) TimerEvent: {}
+[14.124823] (-) TimerEvent: {}
+[14.225956] (-) TimerEvent: {}
+[14.327130] (-) TimerEvent: {}
+[14.428326] (-) TimerEvent: {}
+[14.529571] (-) TimerEvent: {}
+[14.630775] (-) TimerEvent: {}
+[14.731974] (-) TimerEvent: {}
+[14.833179] (-) TimerEvent: {}
+[14.934177] (-) TimerEvent: {}
+[15.035317] (-) TimerEvent: {}
+[15.136518] (-) TimerEvent: {}
+[15.237662] (-) TimerEvent: {}
+[15.338821] (-) TimerEvent: {}
+[15.440040] (-) TimerEvent: {}
+[15.541217] (-) TimerEvent: {}
+[15.642344] (-) TimerEvent: {}
+[15.743489] (-) TimerEvent: {}
+[15.844720] (-) TimerEvent: {}
+[15.945891] (-) TimerEvent: {}
+[16.047017] (-) TimerEvent: {}
+[16.148176] (-) TimerEvent: {}
+[16.249330] (-) TimerEvent: {}
+[16.350510] (-) TimerEvent: {}
+[16.451694] (-) TimerEvent: {}
+[16.552896] (-) TimerEvent: {}
+[16.654077] (-) TimerEvent: {}
+[16.755274] (-) TimerEvent: {}
+[16.856508] (-) TimerEvent: {}
+[16.957628] (-) TimerEvent: {}
+[17.058742] (-) TimerEvent: {}
+[17.159799] (-) TimerEvent: {}
+[17.260488] (-) TimerEvent: {}
+[17.361222] (-) TimerEvent: {}
+[17.461918] (-) TimerEvent: {}
+[17.562602] (-) TimerEvent: {}
+[17.663265] (-) TimerEvent: {}
+[17.763934] (-) TimerEvent: {}
+[17.864610] (-) TimerEvent: {}
+[17.965282] (-) TimerEvent: {}
+[18.065930] (-) TimerEvent: {}
+[18.166552] (-) TimerEvent: {}
+[18.267171] (-) TimerEvent: {}
+[18.367812] (-) TimerEvent: {}
+[18.468415] (-) TimerEvent: {}
+[18.568811] (-) TimerEvent: {}
+[18.669214] (-) TimerEvent: {}
+[18.769675] (-) TimerEvent: {}
+[18.870281] (-) TimerEvent: {}
+[18.971405] (-) TimerEvent: {}
+[19.072021] (-) TimerEvent: {}
+[19.172659] (-) TimerEvent: {}
+[19.273261] (-) TimerEvent: {}
+[19.373860] (-) TimerEvent: {}
+[19.474469] (-) TimerEvent: {}
+[19.575075] (-) TimerEvent: {}
+[19.675711] (-) TimerEvent: {}
+[19.776315] (-) TimerEvent: {}
+[19.876924] (-) TimerEvent: {}
+[19.977552] (-) TimerEvent: {}
+[20.078172] (-) TimerEvent: {}
+[20.178800] (-) TimerEvent: {}
+[20.279432] (-) TimerEvent: {}
+[20.380052] (-) TimerEvent: {}
+[20.480689] (-) TimerEvent: {}
+[20.581327] (-) TimerEvent: {}
+[20.681960] (-) TimerEvent: {}
+[20.782598] (-) TimerEvent: {}
+[20.883178] (-) TimerEvent: {}
+[20.983778] (-) TimerEvent: {}
+[21.084377] (-) TimerEvent: {}
+[21.184959] (-) TimerEvent: {}
+[21.285535] (-) TimerEvent: {}
+[21.386072] (-) TimerEvent: {}
+[21.486400] (-) TimerEvent: {}
+[21.586843] (-) TimerEvent: {}
+[21.687434] (-) TimerEvent: {}
+[21.788053] (-) TimerEvent: {}
+[21.888664] (-) TimerEvent: {}
+[21.989294] (-) TimerEvent: {}
+[22.089901] (-) TimerEvent: {}
+[22.190487] (-) TimerEvent: {}
+[22.291072] (-) TimerEvent: {}
+[22.391668] (-) TimerEvent: {}
+[22.492248] (-) TimerEvent: {}
+[22.592858] (-) TimerEvent: {}
+[22.693477] (-) TimerEvent: {}
+[22.794079] (-) TimerEvent: {}
+[22.894657] (-) TimerEvent: {}
+[22.995264] (-) TimerEvent: {}
+[23.095882] (-) TimerEvent: {}
+[23.196450] (-) TimerEvent: {}
+[23.297018] (-) TimerEvent: {}
+[23.397610] (-) TimerEvent: {}
+[23.498206] (-) TimerEvent: {}
+[23.598788] (-) TimerEvent: {}
+[23.699424] (-) TimerEvent: {}
+[23.800042] (-) TimerEvent: {}
+[23.900649] (-) TimerEvent: {}
+[24.001240] (-) TimerEvent: {}
+[24.101828] (-) TimerEvent: {}
+[24.202461] (-) TimerEvent: {}
+[24.302938] (-) TimerEvent: {}
+[24.403319] (-) TimerEvent: {}
+[24.503670] (-) TimerEvent: {}
+[24.604096] (-) TimerEvent: {}
+[24.704589] (-) TimerEvent: {}
+[24.805023] (-) TimerEvent: {}
+[24.905401] (-) TimerEvent: {}
+[25.006534] (-) TimerEvent: {}
+[25.107143] (-) TimerEvent: {}
+[25.207723] (-) TimerEvent: {}
+[25.308328] (-) TimerEvent: {}
+[25.408872] (-) TimerEvent: {}
+[25.509332] (-) TimerEvent: {}
+[25.609836] (-) TimerEvent: {}
+[25.710428] (-) TimerEvent: {}
+[25.811039] (-) TimerEvent: {}
+[25.911651] (-) TimerEvent: {}
+[26.012249] (-) TimerEvent: {}
+[26.112891] (-) TimerEvent: {}
+[26.213494] (-) TimerEvent: {}
+[26.314117] (-) TimerEvent: {}
+[26.414835] (-) TimerEvent: {}
+[26.515940] (-) TimerEvent: {}
+[26.617008] (-) TimerEvent: {}
+[26.718041] (-) TimerEvent: {}
+[26.819227] (-) TimerEvent: {}
+[26.920369] (-) TimerEvent: {}
+[27.021475] (-) TimerEvent: {}
+[27.122624] (-) TimerEvent: {}
+[27.223778] (-) TimerEvent: {}
+[27.324927] (-) TimerEvent: {}
+[27.426081] (-) TimerEvent: {}
+[27.527207] (-) TimerEvent: {}
+[27.628323] (-) TimerEvent: {}
+[27.729463] (-) TimerEvent: {}
+[27.830576] (-) TimerEvent: {}
+[27.931716] (-) TimerEvent: {}
+[28.032977] (-) TimerEvent: {}
+[28.134315] (-) TimerEvent: {}
+[28.235588] (-) TimerEvent: {}
+[28.336867] (-) TimerEvent: {}
+[28.438115] (-) TimerEvent: {}
+[28.539410] (-) TimerEvent: {}
+[28.640643] (-) TimerEvent: {}
+[28.741828] (-) TimerEvent: {}
+[28.843048] (-) TimerEvent: {}
+[28.944229] (-) TimerEvent: {}
+[29.045377] (-) TimerEvent: {}
+[29.146594] (-) TimerEvent: {}
+[29.228957] (contact) StdoutLine: {'line': b'[ 87%] \x1b[32m\x1b[1mLinking CXX executable contact\x1b[0m\n'}
+[29.246777] (-) TimerEvent: {}
+[29.347797] (-) TimerEvent: {}
+[29.448873] (-) TimerEvent: {}
+[29.550093] (-) TimerEvent: {}
+[29.650928] (-) TimerEvent: {}
+[29.751807] (-) TimerEvent: {}
+[29.852890] (-) TimerEvent: {}
+[29.953896] (-) TimerEvent: {}
+[30.054656] (-) TimerEvent: {}
+[30.156065] (-) TimerEvent: {}
+[30.256988] (-) TimerEvent: {}
+[30.357931] (-) TimerEvent: {}
+[30.459079] (-) TimerEvent: {}
+[30.560178] (-) TimerEvent: {}
+[30.661361] (-) TimerEvent: {}
+[30.762533] (-) TimerEvent: {}
+[30.863658] (-) TimerEvent: {}
+[30.964877] (-) TimerEvent: {}
+[31.066053] (-) TimerEvent: {}
+[31.167121] (-) TimerEvent: {}
+[31.268022] (-) TimerEvent: {}
+[31.368961] (-) TimerEvent: {}
+[31.387073] (contact) StdoutLine: {'line': b'[100%] Built target contact\n'}
+[31.427662] (contact) CommandEnded: {'returncode': 0}
+[31.429427] (contact) JobProgress: {'identifier': 'contact', 'progress': 'install'}
+[31.468932] (contact) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact'], 'cwd': '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact', 'env': OrderedDict([('SUDO_GID', '1000'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('MAIL', '/var/mail/root'), ('LANGUAGE', 'en_US.UTF-8'), ('USER', 'root'), ('LC_TIME', 'en_US.UTF-8'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/lib:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs/lib:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs/lib:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs/lib:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs/lib:/root/.x-cmd.root/local/data/pkg/sphere/X/l/j/h/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/home/orangepi/GM/nuc/GMaster_project/src'), ('RANGER_LEVEL', '1'), ('___X_CMD_LOG_C_TF', ''), ('ROS_PYTHON_VERSION', '3'), ('___X_CMD_LOG_C_WARN', '\\033[1;33m'), ('LC_MONETARY', 'en_US.UTF-8'), ('COLORTERM', 'truecolor'), ('ESCDELAY', '25'), ('___X_CMD_LOG_C_ERROR', '\\033[1;31m'), ('COLCON_PREFIX_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/pubtx/install:/home/orangepi/GM/nuc/GMaster_project/src/contact/install:/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install:/home/orangepi/GM/nuc/GMaster_project/install'), ('SUDO_UID', '1000'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('___X_CMD_LOG_C_DEBUG', '\\033[2;35m'), ('TERM', 'xterm-256color'), ('BASH_SILENCE_DEPRECATION_WARNING', '1'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/root/.x-cmd.root/local/data/pkg/sphere/X/l/j/h/bin:/root/.x-cmd.root/bin:/root/.cargo/bin:/root/.x-cmd.root/local/data/pkg/sphere/X/tree.linux.arm64.0/miniconda/v3.10.0+23.9.0-0/bin:/root/.cargo/bin:/root/.cargo/bin:/opt/ros/humble/bin:/root/.x-cmd.root/local/data/pkg/sphere/X/tree.linux.arm64.0/miniconda/v3.10.0+23.9.0-0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/.fzf/bin:/root/.x-cmd.root/local/data/triarii/bin'), ('LC_ADDRESS', 'en_US.UTF-8'), ('DISPLAY', ':0.0'), ('LANG', 'zh_CN.UTF-8'), ('XDG_CURRENT_DESKTOP', 'XFCE'), ('LC_TELEPHONE', 'en_US.UTF-8'), ('XAUTHORITY', '/home/orangepi/.Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SUDO_COMMAND', '/usr/bin/su'), ('AMENT_PREFIX_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/pubtx/install/test_tx_pub:/home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact:/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs:/opt/ros/humble'), ('LC_MESSAGES', 'en_US.UTF-8'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_US.UTF-8'), ('SUDO_USER', 'orangepi'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'en_US.UTF-8'), ('LC_IDENTIFICATION', 'en_US.UTF-8'), ('PWD', '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact'), ('LC_ALL', 'zh_CN.UTF-8'), ('PYTHONPATH', '/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs/local/lib/python3.10/dist-packages:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'en_US.UTF-8'), ('___X_CMD_LOG_C_INFO', '\\033[32m'), ('LC_PAPER', 'en_US.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/orangepi/GM/nuc/GMaster_project/src/pubtx/install/test_tx_pub:/home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact:/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs:/home/orangepi/GM/nuc/Robomaster_2024XJTLU_Vision/gary_msgs/install/gary_msgs:/home/orangepi/GM/nuc/GMaster_project/install/vision_msgs:/home/orangepi/GM/nuc/GMaster_project/install/sentry_msgs:/home/orangepi/GM/nuc/GMaster_project/install/gary_msgs:/opt/ros/humble')]), 'shell': False}
+[31.470780] (-) TimerEvent: {}
+[31.503396] (contact) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[31.504591] (contact) StdoutLine: {'line': b'-- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/lib/contact/contact\n'}
+[31.529380] (contact) StdoutLine: {'line': b'-- Set runtime path of "/home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/lib/contact/contact" to ""\n'}
+[31.530407] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/ament_index/resource_index/package_run_dependencies/contact\n'}
+[31.530851] (contact) StdoutLine: {'line': b'-- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/ament_index/resource_index/parent_prefix_path/contact\n'}
+[31.531766] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/ament_prefix_path.sh\n'}
+[31.532188] (contact) StdoutLine: {'line': b'-- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/ament_prefix_path.dsv\n'}
+[31.532610] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/path.sh\n'}
+[31.532997] (contact) StdoutLine: {'line': b'-- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/path.dsv\n'}
+[31.533350] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.bash\n'}
+[31.536560] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.sh\n'}
+[31.536890] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.zsh\n'}
+[31.537399] (contact) StdoutLine: {'line': b'-- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.dsv\n'}
+[31.537770] (contact) StdoutLine: {'line': b'-- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/package.dsv\n'}
+[31.538005] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/ament_index/resource_index/packages/contact\n'}
+[31.538259] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/cmake/contactConfig.cmake\n'}
+[31.538524] (contact) StdoutLine: {'line': b'-- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/cmake/contactConfig-version.cmake\n'}
+[31.538769] (contact) StdoutLine: {'line': b'-- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/package.xml\n'}
+[31.539002] (contact) CommandEnded: {'returncode': 0}
+[31.571163] (-) TimerEvent: {}
+[31.590979] (contact) JobEnded: {'identifier': 'contact', 'rc': 0}
+[31.594853] (-) EventReactorShutdown: {}
