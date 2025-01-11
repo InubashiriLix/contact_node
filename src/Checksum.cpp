@@ -29,11 +29,12 @@ const unsigned char CRC8_TAB[256] = {
 
 unsigned char Crc8Checksum(unsigned char *pchMessage, unsigned int dwLength,
                            unsigned char ucCRC8) {
-  uint8_t crc = 0;
-  for (unsigned int i = 0; i < dwLength; i++) {
-    crc = CRC8_TAB[crc ^ pchMessage[i]];
+  unsigned char uc_index;
+  while (dwLength--) {
+    uc_index = ucCRC8 ^ (*pchMessage++);
+    ucCRC8 = CRC8_TAB[uc_index];
   }
-  return crc;
+  return (ucCRC8);
 }
 
 /*
