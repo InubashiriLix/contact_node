@@ -34,31 +34,31 @@ void CommPort::Read() {
     try {
       if (port_.read(rx_buffer_, sizeof(rx_buffer_)) != 0) {
         switch (rx_buffer_[0]) {
-          case 0xA5: {
-            RxHandler();
+        case 0xA5: {
+          RxHandler_slow();
 //                        write_clear_flag_ = false;
 #ifdef USE_DEBUG_SETTINGS
-            auto start = std::chrono::high_resolution_clock::now();
+          auto start = std::chrono::high_resolution_clock::now();
 #endif
 //                        TxHandler();
 //                        Write(tx_buffer_, sizeof(tx_buffer_), true);
 #ifdef USE_DEBUG_SETTINGS
-            auto elapsed = std::chrono::high_resolution_clock::now() - start;
-            printf(
-                "Motion result: %d, Latency: %ld\n", tx_struct_.flag,
-                std::chrono::duration_cast<std::chrono::microseconds>(elapsed)
-                    .count());
+          auto elapsed = std::chrono::high_resolution_clock::now() - start;
+          printf("Motion result: %d, Latency: %ld\n", tx_struct_.flag,
+                 std::chrono::duration_cast<std::chrono::microseconds>(elapsed)
+                     .count());
 #endif
-            //                        write_clear_flag_ = true;
-            break;
-          }
+          //                        write_clear_flag_ = true;
+          break;
+        }
 
-          case 0xF8: {
-            break;
-          }
+        case 0xF8: {
+          RxHandler_fast();
+          break;
+        }
 
-          default:
-            break;
+        default:
+          break;
         }
       }
     } catch (const serial::SerialException &ex) {
@@ -100,6 +100,7 @@ void CommPort::Write(const uint8_t *tx_packet, size_t size, bool safe_write) {
 }
 
 // sentry only
+// 废物函数，一用就segmentation fault
 void CommPort::RunAsync(SERIAL_MODE mode) {
   if (mode == TX_SYNC) {
     logger_->info("Serial mode: TX_SYNC");
@@ -157,10 +158,14 @@ void CommPort::SerialFailsafeCallback(bool reopen) {
   exception_handled_flag_ = true;
 }
 
-// rx: receive
-// tx: transport
-void CommPort::RxHandler() {
-  if (Crc8Verify(rx_buffer_, sizeof(ProjectileRx))) {
-    memcpy(&rx_struct_, rx_buffer_, sizeof(ProjectileRx));
+void CommPort::RxHandler_slow() {
+  if (Crc8Verify(rx_buffer_, sizeof(ProjectileRx_slow))) {
+    memcpy(&rx_struct_slow_, rx_buffer_, sizeof(ProjectileRx_slow));
+  }
+}
+
+void CommPort::RxHandler_fast() {
+  if (Crc8Verify(rx_buffer_, sizeof(ProjectileRx_fast))) {
+    memcpy(&rx_struct_fast_, rx_buffer_, sizeof(ProjectileRx_fast));
   }
 }

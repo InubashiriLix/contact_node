@@ -648,6 +648,16 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
   /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
   /usr/include/linux/close_range.h \
   /usr/include/c++/11/iostream \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/locale \
+  /usr/include/c++/11/bits/locale_facets_nonio.h \
+  /usr/include/aarch64-linux-gnu/c++/11/bits/time_members.h \
+  /usr/include/aarch64-linux-gnu/c++/11/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/11/bits/locale_conv.h \
+  /usr/include/c++/11/bits/quoted_string.h \
   /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/quaternion.hpp \
   /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__struct.hpp \
   /usr/include/c++/11/algorithm \
@@ -659,16 +669,6 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
   /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__traits.hpp \
   /opt/ros/humble/include/rosidl_runtime_cpp/rosidl_runtime_cpp/traits.hpp \
   /usr/include/c++/11/codecvt \
-  /usr/include/c++/11/bits/codecvt.h \
-  /usr/include/c++/11/iomanip \
-  /usr/include/c++/11/locale \
-  /usr/include/c++/11/bits/locale_facets_nonio.h \
-  /usr/include/aarch64-linux-gnu/c++/11/bits/time_members.h \
-  /usr/include/aarch64-linux-gnu/c++/11/bits/messages_members.h \
-  /usr/include/libintl.h \
-  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
-  /usr/include/c++/11/bits/locale_conv.h \
-  /usr/include/c++/11/bits/quoted_string.h \
   /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__type_support.hpp \
   /opt/ros/humble/include/rosidl_typesupport_interface/rosidl_typesupport_interface/macros.h \
   /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/rosidl_generator_cpp__visibility_control.hpp \
@@ -1110,6 +1110,10 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/client_receive__struct.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/client_receive__builder.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/client_receive__traits.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/shoot_data.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__struct.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__builder.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__traits.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/field_events.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/field_events__struct.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/field_events__builder.hpp \
@@ -1181,6 +1185,8 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/auto_aim.hpp:
 
 /opt/ros/humble/include/sensor_msgs/sensor_msgs/msg/detail/joy__builder.hpp:
+
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/shoot_data.hpp:
 
 /opt/ros/humble/include/sensor_msgs/sensor_msgs/msg/joy.hpp:
 
@@ -1740,6 +1746,8 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
 
 /usr/include/aarch64-linux-gnu/c++/11/bits/cxxabi_tweaks.h:
 
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__builder.hpp:
+
 /usr/include/c++/11/bits/concept_check.h:
 
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/auto_aim__builder.hpp:
@@ -2015,6 +2023,8 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/robot_hp.hpp:
 
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/game_result__struct.hpp:
+
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__traits.hpp:
 
 /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h:
 
@@ -2328,6 +2338,18 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
 
 ../../src/ContactNode.cpp:
 
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__struct.hpp:
+
+/usr/include/c++/11/bits/locale_facets_nonio.h:
+
+/opt/ros/humble/include/rcl/rcl/timer.h:
+
+/usr/include/c++/11/bits/char_traits.h:
+
+/usr/include/libintl.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.tcc:
+
 /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__struct.hpp:
 
 /opt/ros/humble/include/rcutils/rcutils/types/string_array.h:
@@ -2341,16 +2363,6 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
 /usr/include/aarch64-linux-gnu/bits/siginfo-arch.h:
 
 /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__traits.hpp:
-
-/usr/include/c++/11/bits/locale_facets_nonio.h:
-
-/opt/ros/humble/include/rcl/rcl/timer.h:
-
-/usr/include/c++/11/bits/char_traits.h:
-
-/usr/include/libintl.h:
-
-/usr/include/c++/11/bits/locale_facets_nonio.tcc:
 
 /opt/ros/humble/include/rosidl_typesupport_interface/rosidl_typesupport_interface/macros.h:
 
