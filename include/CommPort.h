@@ -162,6 +162,10 @@ public:
     float yaw;
     float pitch;
 
+    uint8_t lever_mode;
+    // the lever_mode show the mode of right lever on the remote controller
+    // SW_UP -> 1 SW_MID = 2 SW_DOWN = 3
+
     float bullet_speed;
     // NOTE: Now the bullet_speed is added through the shoot_data and
     // _bullet_speed_pub_
@@ -181,12 +185,11 @@ public:
 
     // the gurgement part (coming from c borad)
     uint8_t shoot_remote;
-    uint8_t armor_color;
     // TODO: WTF is the two things above
     // the current side color (which team we are)
     //
-    // 0 -> red
-    // 1 -> blue
+    // 1 -> red
+    // 2 -> blue
     uint8_t current_side_color;
     // the enemt_hp
     uint16_t enemy_hp[6];
@@ -289,7 +292,7 @@ public:
     float linear_y;
     float angular_z;
 
-    uint8_t autofire;
+    uint8_t autofire; // the autofire is to tell the robot to fire
     uint8_t placeholder2;
     uint8_t placeholder3;
 

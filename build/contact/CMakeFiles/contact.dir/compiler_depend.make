@@ -1110,10 +1110,10 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/client_receive__struct.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/client_receive__builder.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/client_receive__traits.hpp \
-  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/shoot_data.hpp \
-  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__struct.hpp \
-  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__builder.hpp \
-  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__traits.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/dr16_receiver.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/dr16_receiver__struct.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/dr16_receiver__builder.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/dr16_receiver__traits.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/field_events.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/field_events__struct.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/field_events__builder.hpp \
@@ -1141,7 +1141,11 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/robot_status.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/robot_status__struct.hpp \
   /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/robot_status__builder.hpp \
-  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/robot_status__traits.hpp
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/robot_status__traits.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/shoot_data.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__struct.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__builder.hpp \
+  /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__traits.hpp
 
 
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/robot_status__builder.hpp:
@@ -1167,6 +1171,14 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/field_events__traits.hpp:
 
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/field_events.hpp:
+
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/dr16_receiver__traits.hpp:
+
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/dr16_receiver__builder.hpp:
+
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/dr16_receiver__struct.hpp:
+
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/dr16_receiver.hpp:
 
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/client_receive__builder.hpp:
 
@@ -2020,11 +2032,11 @@ CMakeFiles/contact.dir/src/ContactNode.cpp.o: ../../src/ContactNode.cpp \
 
 /usr/include/c++/11/cstdio:
 
+/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__traits.hpp:
+
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/robot_hp.hpp:
 
 /home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/game_result__struct.hpp:
-
-/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/include/sentry_msgs/sentry_msgs/msg/detail/shoot_data__traits.hpp:
 
 /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h:
 

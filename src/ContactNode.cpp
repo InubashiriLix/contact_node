@@ -18,8 +18,7 @@
 #include <sentry_msgs/msg/bullet_remaining.hpp>
 #include <sentry_msgs/msg/client_command.hpp>
 #include <sentry_msgs/msg/client_receive.hpp>
-#include <sentry_msgs/msg/shoot_data.hpp>
-// #include <sentry_msgs/msg/dr16_receiver.hpp>
+#include <sentry_msgs/msg/dr16_receiver.hpp>
 #include <sentry_msgs/msg/field_events.hpp>
 #include <sentry_msgs/msg/game_result.hpp>
 #include <sentry_msgs/msg/game_status.hpp>
@@ -27,6 +26,7 @@
 #include <sentry_msgs/msg/robot_hp.hpp>
 #include <sentry_msgs/msg/robot_position.hpp>
 #include <sentry_msgs/msg/robot_status.hpp>
+#include <sentry_msgs/msg/shoot_data.hpp>
 
 using namespace std::chrono_literals;
 
@@ -90,6 +90,8 @@ public:
     _client_receive_pub_ =
         this->create_publisher<sentry_msgs::msg::ClientReceive>(
             "/referee/client_receive", 10);
+    _dr16_receive_pub_ = this->create_publisher<sentry_msgs::msg::DR16Receiver>(
+        "/remote_control", 10);
   }
 
   void chassis_cmd_vel_callback(const geometry_msgs::msg::Twist msg) {
@@ -145,6 +147,12 @@ public:
                 autoaim_status_publishing_msg.yaw);
     _autoaim_status_pub_->publish(autoaim_status_publishing_msg);
 
+    sentry_msgs::msg::DR16Receiver dr16_receiver_msg;
+    dr16_receiver_msg.sw_right = comm.rx_struct_fast_.lever_mode;
+    _dr16_receive_pub_->publish(dr16_receiver_msg);
+    RCLCPP_INFO(this->get_logger(), "Published dr16 receiver: %d",
+                dr16_receiver_msg.sw_right);
+
     // publish vision mode
     auto mode_msg = std_msgs::msg::Int32();
     mode_msg.data =
@@ -167,32 +175,33 @@ public:
     RCLCPP_INFO(this->get_logger(), "Publishing bullet_speed: %f",
                 shoot_data.bullet_speed);
 
-    // NOTE: DEBUG DELETE START THERE FOR SLOW
-    // publish the enemy hp
     uint8_t side = comm.rx_struct_slow_.current_side_color;
     sentry_msgs::msg::RobotHP enemy_hp_msg;
     auto enemy_hp = comm.rx_struct_slow_.enemy_hp;
     // TODO: please update the color info in the C board
-    if (side) {
+    if (side == 2) { // we are blue
       enemy_hp_msg.red_1_hero_hp = enemy_hp[0];
       enemy_hp_msg.red_2_engineer_hp = enemy_hp[1];
       enemy_hp_msg.red_3_infantry_hp = enemy_hp[2];
       enemy_hp_msg.red_4_infantry_hp = enemy_hp[3];
       enemy_hp_msg.red_5_infantry_hp = enemy_hp[4];
       enemy_hp_msg.red_7_sentry_hp = enemy_hp[5];
-    } else if (side == 0) {
+    } else if (side == 1) { // we are red
       enemy_hp_msg.blue_1_hero_hp = enemy_hp[0];
       enemy_hp_msg.blue_2_engineer_hp = enemy_hp[1];
       enemy_hp_msg.blue_3_infantry_hp = enemy_hp[2];
       enemy_hp_msg.blue_4_infantry_hp = enemy_hp[3];
       enemy_hp_msg.blue_5_infantry_hp = enemy_hp[4];
       enemy_hp_msg.blue_7_sentry_hp = enemy_hp[5];
+    } else {
+      RCLCPP_WARN(this->get_logger(), "Invalid side color: %d", side);
     }
     _robot_hp_pub_->publish(enemy_hp_msg);
     RCLCPP_INFO(this->get_logger(),
                 "Published enemy hp: %d, %d, %d, %d, %d, %d", enemy_hp[0],
                 enemy_hp[1], enemy_hp[2], enemy_hp[3], enemy_hp[4],
                 enemy_hp[5]);
+    RCLCPP_INFO(this->get_logger(), "current_side_color: %d", side);
 
     // publish the bullet remaining
     sentry_msgs::msg::BulletRemaining bullet_remaining_msgs;
@@ -416,6 +425,8 @@ private:
       _client_command_pub_;
   rclcpp::Publisher<sentry_msgs::msg::ClientReceive>::SharedPtr
       _client_receive_pub_;
+  rclcpp::Publisher<sentry_msgs::msg::DR16Receiver>::SharedPtr
+      _dr16_receive_pub_;
 
   CommPort comm;
 };
