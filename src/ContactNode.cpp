@@ -177,66 +177,79 @@ public:
 
     uint8_t side = comm.rx_struct_slow_.current_side_color;
     sentry_msgs::msg::RobotHP enemy_hp_msg;
-    auto enemy_hp = comm.rx_struct_slow_.enemy_hp;
     // TODO: please update the color info in the C board
     if (side == 2) { // we are blue
-      enemy_hp_msg.red_1_hero_hp = enemy_hp[0];
-      enemy_hp_msg.red_2_engineer_hp = enemy_hp[1];
-      enemy_hp_msg.red_3_infantry_hp = enemy_hp[2];
-      enemy_hp_msg.red_4_infantry_hp = enemy_hp[3];
-      enemy_hp_msg.red_5_infantry_hp = enemy_hp[4];
-      enemy_hp_msg.red_7_sentry_hp = enemy_hp[5];
-    } else if (side == 1) { // we are red
-      enemy_hp_msg.blue_1_hero_hp = enemy_hp[0];
-      enemy_hp_msg.blue_2_engineer_hp = enemy_hp[1];
-      enemy_hp_msg.blue_3_infantry_hp = enemy_hp[2];
-      enemy_hp_msg.blue_4_infantry_hp = enemy_hp[3];
-      enemy_hp_msg.blue_5_infantry_hp = enemy_hp[4];
-      enemy_hp_msg.blue_7_sentry_hp = enemy_hp[5];
+      enemy_hp_msg.red_1_hero_hp = comm.rx_struct_slow_.enemy_1_robot_HP;
+      enemy_hp_msg.red_2_engineer_hp = comm.rx_struct_slow_.enemy_2_robot_HP;
+      enemy_hp_msg.red_3_infantry_hp = comm.rx_struct_slow_.enemy_3_robot_HP;
+      enemy_hp_msg.red_4_infantry_hp = comm.rx_struct_slow_.enemy_4_robot_HP;
+      enemy_hp_msg.red_5_infantry_hp = comm.rx_struct_slow_.enemy_5_robot_HP;
+      enemy_hp_msg.red_7_sentry_hp = comm.rx_struct_slow_.enemy_7_robot_HP;
+      enemy_hp_msg.red_outpost_hp = comm.rx_struct_slow_.enemy_outpost_HP;
+      enemy_hp_msg.red_base_hp = comm.rx_struct_slow_.enemy_base_HP;
+
+    } else if (side == 1) {
+      enemy_hp_msg.blue_1_hero_hp = comm.rx_struct_slow_.enemy_1_robot_HP;
+      enemy_hp_msg.blue_2_engineer_hp = comm.rx_struct_slow_.enemy_2_robot_HP;
+      enemy_hp_msg.blue_3_infantry_hp = comm.rx_struct_slow_.enemy_3_robot_HP;
+      enemy_hp_msg.blue_4_infantry_hp = comm.rx_struct_slow_.enemy_4_robot_HP;
+      enemy_hp_msg.blue_5_infantry_hp = comm.rx_struct_slow_.enemy_5_robot_HP;
+      enemy_hp_msg.blue_7_sentry_hp = comm.rx_struct_slow_.enemy_7_robot_HP;
+      enemy_hp_msg.blue_outpost_hp = comm.rx_struct_slow_.enemy_outpost_HP;
+      enemy_hp_msg.blue_base_hp = comm.rx_struct_slow_.enemy_base_HP;
     } else {
       RCLCPP_WARN(this->get_logger(), "Invalid side color: %d", side);
     }
     _robot_hp_pub_->publish(enemy_hp_msg);
-    RCLCPP_INFO(this->get_logger(),
-                "Published enemy hp: %d, %d, %d, %d, %d, %d", enemy_hp[0],
-                enemy_hp[1], enemy_hp[2], enemy_hp[3], enemy_hp[4],
-                enemy_hp[5]);
     RCLCPP_INFO(this->get_logger(), "current_side_color: %d", side);
+    RCLCPP_INFO(this->get_logger(),
+                "Published robot hp: %d, %d, %d, %d, %d, %d, %d, %d",
+                comm.rx_struct_slow_.enemy_1_robot_HP,
+                comm.rx_struct_slow_.enemy_2_robot_HP,
+                comm.rx_struct_slow_.enemy_3_robot_HP,
+                comm.rx_struct_slow_.enemy_4_robot_HP,
+                comm.rx_struct_slow_.enemy_5_robot_HP,
+                comm.rx_struct_slow_.enemy_7_robot_HP,
+                comm.rx_struct_slow_.enemy_outpost_HP,
+                comm.rx_struct_slow_.enemy_base_HP);
 
-    // publish the bullet remaining
-    sentry_msgs::msg::BulletRemaining bullet_remaining_msgs;
-    bullet_remaining_msgs.remaining_17mm_num =
-        comm.rx_struct_slow_.bullet_remaining_info;
-    // bullet_remaining_msgs.remaining_42mm_num =
-    // comm.rx_struct_slow_.bullet_remaining_info[1];
-    // bullet_remaining_msgs.remaining_coin_num =
-    // comm.rx_struct_slow_.bullet_remaining_info[2];
-    _bullet_remain_pub_->publish(bullet_remaining_msgs);
-    RCLCPP_INFO(this->get_logger(), "Published bullet remaining: %d",
-                comm.rx_struct_slow_.bullet_remaining_info);
+    // // publish the bullet remaining
+    // sentry_msgs::msg::BulletRemaining bullet_remaining_msgs;
+    // bullet_remaining_msgs.remaining_17mm_num =
+    //     comm.rx_struct_slow_.bullet_remaining_info;
+    // // bullet_remaining_msgs.remaining_42mm_num =
+    // // comm.rx_struct_slow_.bullet_remaining_info[1];
+    // // bullet_remaining_msgs.remaining_coin_num =
+    // // comm.rx_struct_slow_.bullet_remaining_info[2];
+    // _bullet_remain_pub_->publish(bullet_remaining_msgs);
+    // RCLCPP_INFO(this->get_logger(), "Published bullet remaining: %d",
+    //             comm.rx_struct_slow_.bullet_remaining_info);
+    // NOTE: the bullet_remaining_info was deprecated in 2024 referee
 
     // publish the field events
     sentry_msgs::msg::FieldEvents field_events_msgs;
     field_events_msgs.supplier_1_occupation =
-        comm.rx_struct_slow_.field_events[0];
+        comm.rx_struct_slow_.field_events & 0b1;
     field_events_msgs.supplier_2_occupation =
-        comm.rx_struct_slow_.field_events[1];
+        (comm.rx_struct_slow_.field_events >> 1) & 0b1;
     field_events_msgs.supplier_3_occupation =
-        comm.rx_struct_slow_.field_events[2];
-    field_events_msgs.power_rune_activation_point_occupation =
-        comm.rx_struct_slow_.field_events[3];
+        (comm.rx_struct_slow_.field_events >> 2) & 0b1;
     field_events_msgs.small_power_rune_activation_status =
-        comm.rx_struct_slow_.field_events[4];
+        (comm.rx_struct_slow_.field_events >> 3) & 0b1;
     field_events_msgs.big_power_rune_activation_status =
-        comm.rx_struct_slow_.field_events[5];
-    field_events_msgs.r2b2_ground_occupation =
-        comm.rx_struct_slow_.field_events[6];
-    field_events_msgs.r3b3_ground_occupation =
-        comm.rx_struct_slow_.field_events[7];
-    field_events_msgs.r4b4_ground_occupation =
-        comm.rx_struct_slow_.field_events[8];
-    field_events_msgs.base_has_shield = comm.rx_struct_slow_.field_events[9];
-    field_events_msgs.outpost_alive = comm.rx_struct_slow_.field_events[10];
+        (comm.rx_struct_slow_.field_events >> 4) & 0b1;
+    // field_events_msgs.r2b2_ground_occupation =
+    //     comm.rx_struct_slow_.field_events[6];
+    // field_events_msgs.power_rune_activation_point_occupation =
+    //     (comm.rx_struct_slow_.field_events >> 3) & 0b1;
+    // field_events_msgs.r3b3_ground_occupation =
+    //     comm.rx_struct_slow_.field_events[7];
+    // field_events_msgs.r4b4_ground_occupation =
+    //     comm.rx_struct_slow_.field_events[8];
+    // field_events_msgs.base_has_shield = comm.rx_struct_slow_.field_events[9];
+    // field_events_msgs.outpost_alive = comm.rx_struct_slow_.field_events[10];
+    // NOTE: UNCLEAR msg like r2b2 ground occupation, please fix if the field
+    // data are needed
 
     _field_events_pub_->publish(field_events_msgs);
 
@@ -261,58 +274,54 @@ public:
 
     // robot buff
     sentry_msgs::msg::RobotBuff robot_buffs_msgs;
-    robot_buffs_msgs.robot_replenishing_blood =
-        comm.rx_struct_slow_.robot_buffs[0];
+    // robot_buffs_msgs.robot_replenishing_blood = comm.rx_struct_slow_.; //
+    // NOTE: unkonwn buff in 2024
     robot_buffs_msgs.shooter_cooling_acceleration =
-        comm.rx_struct_slow_.robot_buffs[1];
-    robot_buffs_msgs.robot_defense_bonus = comm.rx_struct_slow_.robot_buffs[2];
-    robot_buffs_msgs.robot_attack_bonus = comm.rx_struct_slow_.robot_buffs[3];
-    RCLCPP_INFO(this->get_logger(), "Published robot buff: %d, %d, %d, %d",
-                comm.rx_struct_slow_.robot_buffs[0],
-                comm.rx_struct_slow_.robot_buffs[1],
-                comm.rx_struct_slow_.robot_buffs[2],
-                comm.rx_struct_slow_.robot_buffs[3]);
+        comm.rx_struct_slow_.cooling_buff;
+    robot_buffs_msgs.robot_defense_bonus = comm.rx_struct_slow_.defence_buff;
+    robot_buffs_msgs.robot_attack_bonus = comm.rx_struct_slow_.attack_buff;
+    RCLCPP_INFO(this->get_logger(), "Published robot buff: %d, %d, %d",
+                comm.rx_struct_slow_.cooling_buff,
+                comm.rx_struct_slow_.defence_buff,
+                comm.rx_struct_slow_.attack_buff);
 
     // robot position
     sentry_msgs::msg::RobotPosition robot_position_msgs;
-    robot_position_msgs.x = comm.rx_struct_slow_.robot_position[0];
-    robot_position_msgs.y = comm.rx_struct_slow_.robot_position[1];
-    robot_position_msgs.z = comm.rx_struct_slow_.robot_position[2];
-    robot_position_msgs.yaw = comm.rx_struct_slow_.robot_position[3];
-
+    robot_position_msgs.x = comm.rx_struct_slow_.x;
+    robot_position_msgs.y = comm.rx_struct_slow_.y;
+    // robot_position_msgs.z = comm.rx_struct_slow // NOTE: z is not available
+    // in 2024
+    robot_position_msgs.yaw = comm.rx_struct_slow_.angle;
     _robot_position_pub_->publish(robot_position_msgs);
-    RCLCPP_INFO(this->get_logger(), "Published robot position: %f, %f, %f, %f",
-                comm.rx_struct_slow_.robot_position[0],
-                comm.rx_struct_slow_.robot_position[1],
-                comm.rx_struct_slow_.robot_position[2],
-                comm.rx_struct_slow_.robot_position[3]);
-
+    RCLCPP_INFO(this->get_logger(), "Published robot position: %f, %f, %f",
+                comm.rx_struct_slow_.x, comm.rx_struct_slow_.y,
+                comm.rx_struct_slow_.angle);
     // robot status
     sentry_msgs::msg::RobotStatus robot_status_msgs;
-    robot_status_msgs.robot_id = comm.rx_struct_slow_.robot_status_0[0];
-    robot_status_msgs.robot_level = comm.rx_struct_slow_.robot_status_0[1];
-    robot_status_msgs.remain_hp = comm.rx_struct_slow_.robot_status_1[0];
-    robot_status_msgs.max_hp = comm.rx_struct_slow_.robot_status_1[1];
+    robot_status_msgs.robot_id = comm.rx_struct_slow_.robot_id;
+    robot_status_msgs.robot_level = comm.rx_struct_slow_.robot_level;
+    robot_status_msgs.remain_hp = comm.rx_struct_slow_.current_HP;
+    robot_status_msgs.max_hp = comm.rx_struct_slow_.maximum_HP;
     robot_status_msgs.shooter_17mm_id1_cooling_rate =
-        comm.rx_struct_slow_.robot_status_1[2];
+        comm.rx_struct_slow_.shooter_barrel_cooling_value;
     robot_status_msgs.shooter_17mm_id1_cooling_limit =
-        comm.rx_struct_slow_.robot_status_1[3];
-    robot_status_msgs.shooter_17mm_id1_speed_limit =
-        comm.rx_struct_slow_.robot_status_1[4];
+        comm.rx_struct_slow_.shooter_barrel_heat_limit;
+    // robot_status_msgs.shooter_17mm_id1_speed_limit =
+    //     comm.rx_struct_slow_. // NOTE: 2024 deprecated
     robot_status_msgs.shooter_17mm_id2_cooling_rate =
-        comm.rx_struct_slow_.robot_status_1[5];
+        comm.rx_struct_slow_.shooter_barrel_cooling_value;
     robot_status_msgs.shooter_17mm_id2_cooling_limit =
-        comm.rx_struct_slow_.robot_status_1[6];
-    robot_status_msgs.shooter_17mm_id2_speed_limit =
-        comm.rx_struct_slow_.robot_status_1[7];
+        comm.rx_struct_slow_.shooter_barrel_heat_limit;
+    // robot_status_msgs.shooter_17mm_id2_speed_limit =
+    //     comm.rx_struct_slow_.; // NOTE: 2024 deprecated
     robot_status_msgs.chassis_power_limit =
-        comm.rx_struct_slow_.robot_status_1[11];
-    robot_status_msgs.gimbal_power_output =
-        comm.rx_struct_slow_.robot_status_1[12];
-    robot_status_msgs.chassis_power_output =
-        comm.rx_struct_slow_.robot_status_1[13];
-    robot_status_msgs.shooter_power_output =
-        comm.rx_struct_slow_.robot_status_1[14];
+        comm.rx_struct_slow_.chassis_power_limit;
+    robot_status_msgs.gimbal_power_output = // bool
+        comm.rx_struct_slow_.power_management_gimbal_output;
+    robot_status_msgs.chassis_power_output = // bool
+        comm.rx_struct_slow_.power_management_chassis_output;
+    robot_status_msgs.shooter_power_output = // bool
+        comm.rx_struct_slow_.power_management_shooter_output;
 
     // client command
     sentry_msgs::msg::ClientCommand client_command_msgs;

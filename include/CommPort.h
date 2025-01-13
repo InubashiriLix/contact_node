@@ -30,117 +30,6 @@ struct TxPacket {
 
 class CommPort {
 private:
-  // typedef struct ProjectileRx {
-  //   uint8_t header;
-  //   float q[4];
-  //
-  //   // the data from the c board
-  //   float yaw;
-  //   float pitch;
-  //
-  //   // TODO: WHAT IS THIS?
-  //   uint32_t timestamp;
-  //
-  //   // NOTE: the mode can be set as any value you want
-  //   // 0 -> CLASSIC
-  //   uint8_t vision_mode;
-  //
-  //   // the gurgement part (coming from c borad)
-  //   uint8_t shoot_remote;
-  //   uint8_t armor_color;
-  //   // TODO: WTF is the two things above
-  //   float bullet_speed;
-  //   // NOTE: Now the bullet_speed is added through the shoot_data and
-  //   // _bullet_speed_pub_
-  //
-  //   // the current side color (which team we are)
-  //   // 0 -> red
-  //   // 1 -> blue
-  //   uint8_t current_side_color;
-  //   // the enemt_hp
-  //   uint16_t enemy_hp[6];
-  //
-  //   // the bullet_remaining
-  //   uint16_t bullet_remaining_info[3];
-  //   // 0 -> uint16_t remaining_17mm_num;
-  //   // 1 -> uint16_t remaining_42mm_num;
-  //   // 2 -> uint16_t remaining_coin_num;
-  //
-  //   // field events
-  //   uint8_t field_events[11];
-  //   // 0 -> uint8_t supplier_1_occupation;
-  //   // 1 -> uint8_t supplier_2_occupation;
-  //   // 2 -> uint8_t supplier_3_occupation;
-  //   // 3 -> uint8_t power_rune_activation_point_occupation;
-  //   // 4 -> uint8_t small_power_rune_activation_status;
-  //   // 5 -> uint8_t big_power_rune_activation_status;
-  //   // 6 -> uint8_t r2b2_ground_occupation;
-  //   // 7 -> uint8_t r3b3_ground_occupation;
-  //   // 8 -> uint8_t r4b4_ground_occupation;
-  //   // 9 -> uint8_t base_has_shield;
-  //   // 10 -> uint8_t outpost_alive;
-  //
-  //   // game status
-  //   uint8_t game_type;
-  //   uint8_t game_progress;
-  //   uint16_t state_remain_time;
-  //   uint64_t sync_time_stamp;
-  //
-  //   // game result
-  //   uint8_t winner;
-  //
-  //   // robot buffs
-  //   uint8_t robot_buffs[4];
-  //   // 0 -> uint8_t robot_replenishing_blood;
-  //   // 1 -> uint8_t shooter_cooling_acceleration;
-  //   // 2 -> uint8_t robot_defense_bonus;
-  //   // 3 -> uint8_t robot_attack_bonus;
-  //
-  //   // robot position
-  //   float robot_position[4];
-  //   // 0 -> x = 0.0f;
-  //   // 1 -> y = 0.0f;
-  //   // 2 -> z = 0.0f;
-  //   // 3 -> yaw = 0.0f;
-  //
-  //   // robot status
-  //   uint8_t robot_status_0[2];
-  //   // 0 -> uint8_t robot_id;
-  //   // 1 -> uint8_t robot_level;
-  //   uint16_t robot_status_1[15];
-  //   // 0 -> uint16_t remain_hp;
-  //   // 1 -> uint16_t max_hp;
-  //   // 2 -> uint16_t shooter_17mm_id1_cooling_rate;
-  //   // 3 -> uint16_t shooter_17mm_id1_cooling_limit;
-  //   // 4 -> uint16_t shooter_17mm_id1_speed_limit;
-  //   // 5 -> uint16_t shooter_17mm_id2_cooling_rate;
-  //   // 6 -> uint16_t shooter_17mm_id2_cooling_limit;
-  //   // 7 -> uint16_t shooter_17mm_id2_speed_limit;
-  //   // 8 -> uint16_t shooter_42mm_id1_cooling_rate;
-  //   // 9 -> uint16_t shooter_42mm_id1_cooling_limit;
-  //   // 10 -> uint16_t shooter_42mm_id1_speed;
-  //   // 11 -> uint16_t chassis_power_limit;
-  //   // 12 -> uint16_t gimbal_power_output;
-  //   // 13 -> uint16_t chassis_power_output;
-  //   // 14 -> uint16_t shooter_power_output;
-  //
-  //   // client command
-  //   float command_target_position[3];
-  //   // float target_position_x;
-  //   // float target_position_y;
-  //   // float target_position_z;
-  //   uint16_t keyboard_key_pressed;
-  //   uint8_t command_target_robot_id;
-  //
-  //   // client receive
-  //   float receive_target_position[2];
-  //   // float target_position_x;
-  //   // float target_position_y;
-  //   uint8_t receive_target_robot_id;
-  //
-  //   uint8_t checksum;
-  // } ProjectileRx;
-  //
   std::atomic<bool> read_stop_flag_{};
   std::atomic<bool> write_stop_flag_{};
   std::atomic<bool> write_clear_flag_{};
@@ -180,42 +69,31 @@ public:
     uint32_t timestamp;
 
     // NOTE: the mode can be set as any value you want
-    // 0 -> CLASSIC
-    uint8_t vision_mode;
+    uint8_t vision_mode; // default -> CLASSIC 0, (WIND -> 1)
 
     // the gurgement part (coming from c borad)
     uint8_t shoot_remote;
-    // TODO: WTF is the two things above
+    // TODO: WTF is the one things above
+
     // the current side color (which team we are)
-    //
+    // 0 -> unknown
     // 1 -> red
     // 2 -> blue
     uint8_t current_side_color;
     // the enemt_hp
-    uint16_t enemy_hp[6];
-
-    // the bullet_remaining
-    uint16_t bullet_remaining_info;
-    // for sentry, only 17mm needed
-    // 0 -> uint16_t remaining_17mm_num;
-    // 1 -> uint16_t remaining_42mm_num;
-    // 2 -> uint16_t remaining_coin_num;
+    uint16_t enemy_1_robot_HP;
+    uint16_t enemy_2_robot_HP;
+    uint16_t enemy_3_robot_HP;
+    uint16_t enemy_4_robot_HP;
+    uint16_t enemy_5_robot_HP;
+    uint16_t enemy_7_robot_HP;
+    uint16_t enemy_outpost_HP;
+    uint16_t enemy_base_HP;
 
     // field events
-    uint8_t field_events[11];
-    // 0 -> uint8_t supplier_1_occupation;
-    // 1 -> uint8_t supplier_2_occupation;
-    // 2 -> uint8_t supplier_3_occupation;
-    // 3 -> uint8_t power_rune_activation_point_occupation;
-    // 4 -> uint8_t small_power_rune_activation_status;
-    // 5 -> uint8_t big_power_rune_activation_status;
-    // 6 -> uint8_t r2b2_ground_occupation;
-    // 7 -> uint8_t r3b3_ground_occupation;
-    // 8 -> uint8_t r4b4_ground_occupation;
-    // 9 -> uint8_t base_has_shield;
-    // 10 -> uint8_t outpost_alive;
+    uint32_t field_events;
 
-    // // game status
+    // game status
     uint8_t game_type;
     uint8_t game_progress;
     uint16_t state_remain_time;
@@ -225,39 +103,36 @@ public:
     uint8_t winner;
 
     // robot buffs
-    uint8_t robot_buffs[4];
-    // 0 -> uint8_t robot_replenishing_blood;
-    // 1 -> uint8_t shooter_cooling_acceleration;
-    // 2 -> uint8_t robot_defense_bonus;
-    // 3 -> uint8_t robot_attack_bonus;
+    uint8_t recovery_buff;
+    uint8_t cooling_buff;
+    uint8_t defence_buff;
+    uint8_t vulnerability_buff;
+    uint16_t attack_buff;
 
     // robot position
-    float robot_position[4];
-    // 0 -> x = 0.0f;
-    // 1 -> y = 0.0f;
-    // 2 -> z = 0.0f;
-    // 3 -> yaw = 0.0f;
+    float x;
+    float y;
+    float angle;
 
     // robot status
-    uint8_t robot_status_0[2];
-    // 0 -> uint8_t robot_id;
-    // 1 -> uint8_t robot_level;
-    uint16_t robot_status_1[15];
-    // 0 -> uint16_t remain_hp;
-    // 1 -> uint16_t max_hp;
-    // 2 -> uint16_t shooter_17mm_id1_cooling_rate;
-    // 3 -> uint16_t shooter_17mm_id1_cooling_limit;
-    // 4 -> uint16_t shooter_17mm_id1_speed_limit;
-    // 5 -> uint16_t shooter_17mm_id2_cooling_rate;
-    // 6 -> uint16_t shooter_17mm_id2_cooling_limit;
-    // 7 -> uint16_t shooter_17mm_id2_speed_limit;
-    // 8 -> uint16_t shooter_42mm_id1_cooling_rate;
-    // 9 -> uint16_t shooter_42mm_id1_cooling_limit;
-    // 10 -> uint16_t shooter_42mm_id1_speed;
-    // 11 -> uint16_t chassis_power_limit;
-    // 12 -> uint16_t gimbal_power_output;
-    // 13 -> uint16_t chassis_power_output;
-    // 14 -> uint16_t shooter_power_output;
+    uint8_t robot_id;
+    uint8_t robot_level;
+    uint16_t current_HP;
+    uint16_t maximum_HP;
+    uint16_t shooter_barrel_cooling_value;
+    uint16_t shooter_barrel_heat_limit;
+    uint16_t chassis_power_limit;
+    uint8_t power_management_gimbal_output : 1;
+    uint8_t power_management_chassis_output : 1;
+    uint8_t power_management_shooter_output : 1;
+
+    // ext_power_heat_data_t
+    uint16_t chassis_voltage;
+    uint16_t chassis_current;
+    float chassis_power;
+    uint16_t buffer_energy;
+    uint16_t shooter_17mm_1_barrel_heat;
+    uint16_t shooter_17mm_2_barrel_heat;
 
     // client command
     float command_target_position[3];
@@ -273,7 +148,6 @@ public:
     // float target_position_y;
     uint8_t receive_target_robot_id;
 
-    uint8_t checksum;
   } ProjectileRx_slow;
 
   typedef struct ProjectileTx {
