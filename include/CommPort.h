@@ -152,21 +152,21 @@ public:
 
   typedef struct ProjectileTx {
     uint8_t header;
-    // original rx
-    float yaw;
-    float pitch;
+    // original rx vision
+    float yaw_angle;
+    float pitch_angle;
 
     // autoaim
-    float actual1;
+    float pitch_actual;
     uint8_t raw1[4];
-    float actial2;
+    float yaw_actual;
     uint8_t raw2[4];
     // navigation
     float linear_x;
     float linear_y;
     float angular_z;
 
-    uint8_t autofire; // the autofire is to tell the robot to fire
+    uint8_t target_found; // the autofire is to tell the robot to fire
     uint8_t placeholder2;
     uint8_t placeholder3;
 

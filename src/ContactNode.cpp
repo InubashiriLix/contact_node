@@ -102,12 +102,12 @@ public:
 
   void autoaim_sub_callback(const sentry_msgs::msg::AutoAIM msg) {
     // update the data in the tx_struct_
-    comm.tx_struct_.yaw = msg.yaw;
-    comm.tx_struct_.pitch = msg.pitch;
+    comm.tx_struct_.yaw_angle = msg.yaw;
+    comm.tx_struct_.pitch_angle = msg.pitch;
     if (msg.target_distance > 0)
-      comm.tx_struct_.autofire = 1;
+      comm.tx_struct_.target_found = 1;
     else
-      comm.tx_struct_.autofire = 0;
+      comm.tx_struct_.target_found = 0;
   }
 
   std::string bytesToHexStr(const uint8_t *data, size_t length) {
@@ -370,8 +370,8 @@ public:
     float x_offset = 0.0985;
     float y_offset = -0.013;
 
-    comm.tx_struct_.actual1 = comm.tx_struct_.pitch + x_offset;
-    comm.tx_struct_.actial2 = comm.tx_struct_.yaw + y_offset;
+    comm.tx_struct_.pitch_actual = comm.tx_struct_.pitch_angle + x_offset;
+    comm.tx_struct_.yaw_actual = comm.tx_struct_.yaw_angle + y_offset;
     for (int i = 0; i < 4; i++) {
       comm.tx_struct_.raw1[i] = 0;
       comm.tx_struct_.raw2[i] = 0;
@@ -385,9 +385,10 @@ public:
         this->get_logger(),
         "sending to C board: yaw: %.2f, pitch: %.2f, actual1: %.2f, actual2 "
         ":%.2f, linear_x: %.2f, linear_y: %.2f, angular_z: %.2f",
-        comm.tx_struct_.yaw, comm.tx_struct_.pitch, comm.tx_struct_.actual1,
-        comm.tx_struct_.actial2, comm.tx_struct_.linear_x,
-        comm.tx_struct_.linear_y, comm.tx_struct_.angular_z);
+        comm.tx_struct_.yaw_angle, comm.tx_struct_.pitch_angle,
+        comm.tx_struct_.pitch_actual, comm.tx_struct_.yaw_actual,
+        comm.tx_struct_.linear_x, comm.tx_struct_.linear_y,
+        comm.tx_struct_.angular_z);
 
     RCLCPP_INFO(this->get_logger(), "len: %ld", sizeof(comm.rx_struct_slow_));
     RCLCPP_INFO(this->get_logger(), "len: %ld", sizeof(comm.rx_struct_fast_));

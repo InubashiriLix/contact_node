@@ -1,0 +1,27 @@
+[0.020s] Invoking command in '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact -- -j8 -l8
+[0.153s] [ 50%] Built target serial
+[0.204s] [35m[1mConsolidate compiler generated dependencies of target contact[0m
+[0.262s] [ 62%] [32mBuilding CXX object CMakeFiles/contact.dir/src/ContactNode.cpp.o[0m
+[30.900s] [ 75%] [32m[1mLinking CXX executable contact[0m
+[33.086s] [100%] Built target contact
+[33.135s] Invoked command in '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact -- -j8 -l8
+[33.177s] Invoking command in '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact
+[33.202s] -- Install configuration: ""
+[33.202s] -- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/lib/contact/contact
+[33.220s] -- Set runtime path of "/home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/lib/contact/contact" to ""
+[33.220s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/ament_index/resource_index/package_run_dependencies/contact
+[33.221s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/ament_index/resource_index/parent_prefix_path/contact
+[33.221s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/ament_prefix_path.sh
+[33.221s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/ament_prefix_path.dsv
+[33.222s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/path.sh
+[33.222s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/environment/path.dsv
+[33.222s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.bash
+[33.222s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.sh
+[33.222s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.zsh
+[33.223s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/local_setup.dsv
+[33.223s] -- Installing: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/package.dsv
+[33.224s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/ament_index/resource_index/packages/contact
+[33.226s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/cmake/contactConfig.cmake
+[33.227s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/cmake/contactConfig-version.cmake
+[33.228s] -- Up-to-date: /home/orangepi/GM/nuc/GMaster_project/src/contact/install/contact/share/contact/package.xml
+[33.228s] Invoked command in '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact

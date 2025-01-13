@@ -2,6 +2,9 @@
 
 # 创建一个新的 tmux 会话，命名为 "ros_nodes"，并在其中启动第一个窗口运行第一个节点
 tmux new-session -d -s ros_nodes -n contact_node "
+
+echo 'please run "sudo chmod 777 /dev/ttyACM0 " first'
+
 echo 'Changing directory...';
 cd /home/orangepi/GM/nuc/GMaster_project/src/;
 
