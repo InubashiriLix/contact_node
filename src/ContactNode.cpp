@@ -95,19 +95,23 @@ public:
   }
 
   void chassis_cmd_vel_callback(const geometry_msgs::msg::Twist msg) {
-    comm.tx_struct_.linear_x = msg.linear.x;
-    comm.tx_struct_.linear_y = msg.linear.y;
-    comm.tx_struct_.angular_z = msg.angular.z;
+    comm.setTxLinearX(msg.linear.x);
+    comm.setTxLinearY(msg.linear.y);
+    comm.setTxAngularZ(msg.angular.z);
   }
 
   void autoaim_sub_callback(const sentry_msgs::msg::AutoAIM msg) {
+    // update the temp pitch and yaw to the newest value
+    temp_yaw = comm.getRxStructFast().yaw;
+    temp_pitch = comm.getRxStructFast().pitch;
+
     // update the data in the tx_struct_
-    comm.tx_struct_.yaw_angle = msg.yaw;
-    comm.tx_struct_.pitch_angle = msg.pitch;
+    comm.setTxYaw(msg.yaw + temp_yaw);
+    comm.setTxPitch(msg.pitch + temp_pitch);
     if (msg.target_distance > 0)
-      comm.tx_struct_.target_found = 1;
+      comm.setTxTargetFound(1);
     else
-      comm.tx_struct_.target_found = 0;
+      comm.setTxTargetFound(0);
   }
 
   std::string bytesToHexStr(const uint8_t *data, size_t length) {
@@ -128,10 +132,10 @@ public:
   void rx_timer_callback() {
     // publish the quaternion
     geometry_msgs::msg::Quaternion quaternion_msg;
-    quaternion_msg.x = comm.rx_struct_fast_.q[0];
-    quaternion_msg.y = comm.rx_struct_fast_.q[1];
-    quaternion_msg.z = comm.rx_struct_fast_.q[2];
-    quaternion_msg.w = comm.rx_struct_fast_.q[3]; // 写到打符pre
+    quaternion_msg.x = comm.getRxStructFast().q[0];
+    quaternion_msg.y = comm.getRxStructFast().q[1];
+    quaternion_msg.z = comm.getRxStructFast().q[2];
+    quaternion_msg.w = comm.getRxStructFast().q[3]; // 写到打符pre
     quaternion_pub_->publish(quaternion_msg);
     RCLCPP_INFO(this->get_logger(), "Published quaternion: %f, %f, %f, %f",
                 quaternion_msg.x, quaternion_msg.y, quaternion_msg.z,
@@ -140,29 +144,29 @@ public:
     // publish the current yaw and pitch
     // TODO: where is the according message
     sentry_msgs::msg::AutoAIM autoaim_status_publishing_msg;
-    autoaim_status_publishing_msg.yaw = comm.rx_struct_fast_.pitch;
-    autoaim_status_publishing_msg.pitch = comm.rx_struct_fast_.yaw;
+    autoaim_status_publishing_msg.yaw = comm.getRxStructFast().pitch;
+    autoaim_status_publishing_msg.pitch = comm.getRxStructFast().yaw;
     RCLCPP_INFO(this->get_logger(), "Published pitch: %f, yaw: %f",
                 autoaim_status_publishing_msg.pitch,
                 autoaim_status_publishing_msg.yaw);
     _autoaim_status_pub_->publish(autoaim_status_publishing_msg);
 
     sentry_msgs::msg::DR16Receiver dr16_receiver_msg;
-    dr16_receiver_msg.sw_right = comm.rx_struct_fast_.lever_mode;
+    dr16_receiver_msg.sw_right = comm.getRxStructFast().lever_mode;
     _dr16_receive_pub_->publish(dr16_receiver_msg);
     RCLCPP_INFO(this->get_logger(), "Published dr16 receiver: %d",
                 dr16_receiver_msg.sw_right);
 
     // publish vision mode
     auto mode_msg = std_msgs::msg::Int32();
-    mode_msg.data =
-        comm.rx_struct_slow_.vision_mode; // NOTE: 可以替换为任何你想要的整数值
+    mode_msg.data = comm.getRxStructSlow()
+                        .vision_mode; // NOTE: 可以替换为任何你想要的整数值
     // 发布消息
     _mode_pub_->publish(mode_msg);
     RCLCPP_INFO(this->get_logger(), "Published mode: %d", mode_msg.data);
 
     // TODO: please add the topic stamp somewhere
-    uint32_t timestamp = comm.rx_struct_slow_.timestamp;
+    uint32_t timestamp = comm.getRxStructSlow().timestamp;
     auto timestamp_msg = std_msgs::msg::Int32();
     timestamp_msg.data = timestamp;
     _timestamp_pub_->publish(timestamp_msg);
@@ -170,33 +174,33 @@ public:
 
     // the bullet_speed publisher
     sentry_msgs::msg::ShootData shoot_data;
-    shoot_data.bullet_speed = comm.rx_struct_fast_.bullet_speed;
+    shoot_data.bullet_speed = comm.getRxStructFast().bullet_speed;
     _bullet_speed_pub_->publish(shoot_data);
     RCLCPP_INFO(this->get_logger(), "Publishing bullet_speed: %f",
                 shoot_data.bullet_speed);
 
-    uint8_t side = comm.rx_struct_slow_.current_side_color;
+    uint8_t side = comm.getRxStructSlow().current_side_color;
     sentry_msgs::msg::RobotHP enemy_hp_msg;
     // TODO: please update the color info in the C board
     if (side == 2) { // we are blue
-      enemy_hp_msg.red_1_hero_hp = comm.rx_struct_slow_.enemy_1_robot_HP;
-      enemy_hp_msg.red_2_engineer_hp = comm.rx_struct_slow_.enemy_2_robot_HP;
-      enemy_hp_msg.red_3_infantry_hp = comm.rx_struct_slow_.enemy_3_robot_HP;
-      enemy_hp_msg.red_4_infantry_hp = comm.rx_struct_slow_.enemy_4_robot_HP;
-      enemy_hp_msg.red_5_infantry_hp = comm.rx_struct_slow_.enemy_5_robot_HP;
-      enemy_hp_msg.red_7_sentry_hp = comm.rx_struct_slow_.enemy_7_robot_HP;
-      enemy_hp_msg.red_outpost_hp = comm.rx_struct_slow_.enemy_outpost_HP;
-      enemy_hp_msg.red_base_hp = comm.rx_struct_slow_.enemy_base_HP;
+      enemy_hp_msg.red_1_hero_hp = comm.getRxStructSlow().enemy_1_robot_HP;
+      enemy_hp_msg.red_2_engineer_hp = comm.getRxStructSlow().enemy_2_robot_HP;
+      enemy_hp_msg.red_3_infantry_hp = comm.getRxStructSlow().enemy_3_robot_HP;
+      enemy_hp_msg.red_4_infantry_hp = comm.getRxStructSlow().enemy_4_robot_HP;
+      enemy_hp_msg.red_5_infantry_hp = comm.getRxStructSlow().enemy_5_robot_HP;
+      enemy_hp_msg.red_7_sentry_hp = comm.getRxStructSlow().enemy_7_robot_HP;
+      enemy_hp_msg.red_outpost_hp = comm.getRxStructSlow().enemy_outpost_HP;
+      enemy_hp_msg.red_base_hp = comm.getRxStructSlow().enemy_base_HP;
 
     } else if (side == 1) {
-      enemy_hp_msg.blue_1_hero_hp = comm.rx_struct_slow_.enemy_1_robot_HP;
-      enemy_hp_msg.blue_2_engineer_hp = comm.rx_struct_slow_.enemy_2_robot_HP;
-      enemy_hp_msg.blue_3_infantry_hp = comm.rx_struct_slow_.enemy_3_robot_HP;
-      enemy_hp_msg.blue_4_infantry_hp = comm.rx_struct_slow_.enemy_4_robot_HP;
-      enemy_hp_msg.blue_5_infantry_hp = comm.rx_struct_slow_.enemy_5_robot_HP;
-      enemy_hp_msg.blue_7_sentry_hp = comm.rx_struct_slow_.enemy_7_robot_HP;
-      enemy_hp_msg.blue_outpost_hp = comm.rx_struct_slow_.enemy_outpost_HP;
-      enemy_hp_msg.blue_base_hp = comm.rx_struct_slow_.enemy_base_HP;
+      enemy_hp_msg.blue_1_hero_hp = comm.getRxStructSlow().enemy_1_robot_HP;
+      enemy_hp_msg.blue_2_engineer_hp = comm.getRxStructSlow().enemy_2_robot_HP;
+      enemy_hp_msg.blue_3_infantry_hp = comm.getRxStructSlow().enemy_3_robot_HP;
+      enemy_hp_msg.blue_4_infantry_hp = comm.getRxStructSlow().enemy_4_robot_HP;
+      enemy_hp_msg.blue_5_infantry_hp = comm.getRxStructSlow().enemy_5_robot_HP;
+      enemy_hp_msg.blue_7_sentry_hp = comm.getRxStructSlow().enemy_7_robot_HP;
+      enemy_hp_msg.blue_outpost_hp = comm.getRxStructSlow().enemy_outpost_HP;
+      enemy_hp_msg.blue_base_hp = comm.getRxStructSlow().enemy_base_HP;
     } else {
       RCLCPP_WARN(this->get_logger(), "Invalid side color: %d", side);
     }
@@ -204,178 +208,179 @@ public:
     RCLCPP_INFO(this->get_logger(), "current_side_color: %d", side);
     RCLCPP_INFO(this->get_logger(),
                 "Published robot hp: %d, %d, %d, %d, %d, %d, %d, %d",
-                comm.rx_struct_slow_.enemy_1_robot_HP,
-                comm.rx_struct_slow_.enemy_2_robot_HP,
-                comm.rx_struct_slow_.enemy_3_robot_HP,
-                comm.rx_struct_slow_.enemy_4_robot_HP,
-                comm.rx_struct_slow_.enemy_5_robot_HP,
-                comm.rx_struct_slow_.enemy_7_robot_HP,
-                comm.rx_struct_slow_.enemy_outpost_HP,
-                comm.rx_struct_slow_.enemy_base_HP);
+                comm.getRxStructSlow().enemy_1_robot_HP,
+                comm.getRxStructSlow().enemy_2_robot_HP,
+                comm.getRxStructSlow().enemy_3_robot_HP,
+                comm.getRxStructSlow().enemy_4_robot_HP,
+                comm.getRxStructSlow().enemy_5_robot_HP,
+                comm.getRxStructSlow().enemy_7_robot_HP,
+                comm.getRxStructSlow().enemy_outpost_HP,
+                comm.getRxStructSlow().enemy_base_HP);
 
     // // publish the bullet remaining
     // sentry_msgs::msg::BulletRemaining bullet_remaining_msgs;
     // bullet_remaining_msgs.remaining_17mm_num =
-    //     comm.rx_struct_slow_.bullet_remaining_info;
+    //     comm.getRxStructSlow().bullet_remaining_info;
     // // bullet_remaining_msgs.remaining_42mm_num =
-    // // comm.rx_struct_slow_.bullet_remaining_info[1];
+    // // comm.getRxStructSlow().bullet_remaining_info[1];
     // // bullet_remaining_msgs.remaining_coin_num =
-    // // comm.rx_struct_slow_.bullet_remaining_info[2];
+    // // comm.getRxStructSlow().bullet_remaining_info[2];
     // _bullet_remain_pub_->publish(bullet_remaining_msgs);
     // RCLCPP_INFO(this->get_logger(), "Published bullet remaining: %d",
-    //             comm.rx_struct_slow_.bullet_remaining_info);
+    //             comm.getRxStructSlow().bullet_remaining_info);
     // NOTE: the bullet_remaining_info was deprecated in 2024 referee
 
     // publish the field events
     sentry_msgs::msg::FieldEvents field_events_msgs;
     field_events_msgs.supplier_1_occupation =
-        comm.rx_struct_slow_.field_events & 0b1;
+        comm.getRxStructSlow().field_events & 0b1;
     field_events_msgs.supplier_2_occupation =
-        (comm.rx_struct_slow_.field_events >> 1) & 0b1;
+        (comm.getRxStructSlow().field_events >> 1) & 0b1;
     field_events_msgs.supplier_3_occupation =
-        (comm.rx_struct_slow_.field_events >> 2) & 0b1;
+        (comm.getRxStructSlow().field_events >> 2) & 0b1;
     field_events_msgs.small_power_rune_activation_status =
-        (comm.rx_struct_slow_.field_events >> 3) & 0b1;
+        (comm.getRxStructSlow().field_events >> 3) & 0b1;
     field_events_msgs.big_power_rune_activation_status =
-        (comm.rx_struct_slow_.field_events >> 4) & 0b1;
+        (comm.getRxStructSlow().field_events >> 4) & 0b1;
     // field_events_msgs.r2b2_ground_occupation =
-    //     comm.rx_struct_slow_.field_events[6];
+    //     comm.getRxStructSlow().field_events[6];
     // field_events_msgs.power_rune_activation_point_occupation =
-    //     (comm.rx_struct_slow_.field_events >> 3) & 0b1;
+    //     (comm.getRxStructSlow().field_events >> 3) & 0b1;
     // field_events_msgs.r3b3_ground_occupation =
-    //     comm.rx_struct_slow_.field_events[7];
+    //     comm.getRxStructSlow().field_events[7];
     // field_events_msgs.r4b4_ground_occupation =
-    //     comm.rx_struct_slow_.field_events[8];
-    // field_events_msgs.base_has_shield = comm.rx_struct_slow_.field_events[9];
-    // field_events_msgs.outpost_alive = comm.rx_struct_slow_.field_events[10];
-    // NOTE: UNCLEAR msg like r2b2 ground occupation, please fix if the field
-    // data are needed
+    //     comm.getRxStructSlow().field_events[8];
+    // field_events_msgs.base_has_shield =
+    // comm.getRxStructSlow().field_events[9]; field_events_msgs.outpost_alive =
+    // comm.getRxStructSlow().field_events[10]; NOTE: UNCLEAR msg like r2b2
+    // ground occupation, please fix if the field data are needed
 
     _field_events_pub_->publish(field_events_msgs);
 
     // game satatus
     sentry_msgs::msg::GameStatus game_status_msgs;
-    game_status_msgs.game_type = comm.rx_struct_slow_.game_type;
-    game_status_msgs.game_progress = comm.rx_struct_slow_.game_progress;
-    game_status_msgs.stage_remain_time = comm.rx_struct_slow_.state_remain_time;
-    game_status_msgs.sync_time_stamp = comm.rx_struct_slow_.sync_time_stamp;
+    game_status_msgs.game_type = comm.getRxStructSlow().game_type;
+    game_status_msgs.game_progress = comm.getRxStructSlow().game_progress;
+    game_status_msgs.stage_remain_time =
+        comm.getRxStructSlow().state_remain_time;
+    game_status_msgs.sync_time_stamp = comm.getRxStructSlow().sync_time_stamp;
     _game_status_pub_->publish(game_status_msgs);
     RCLCPP_INFO(this->get_logger(), "Published game status: %d, %d, %d",
-                comm.rx_struct_slow_.game_type,
-                comm.rx_struct_slow_.game_progress,
-                comm.rx_struct_slow_.state_remain_time);
+                comm.getRxStructSlow().game_type,
+                comm.getRxStructSlow().game_progress,
+                comm.getRxStructSlow().state_remain_time);
 
     // game result
     sentry_msgs::msg::GameResult game_result_msgs;
-    game_result_msgs.winner = comm.rx_struct_slow_.winner;
+    game_result_msgs.winner = comm.getRxStructSlow().winner;
     _game_result_pub_->publish(game_result_msgs);
     RCLCPP_INFO(this->get_logger(), "Published game result: %d",
-                comm.rx_struct_slow_.winner);
+                comm.getRxStructSlow().winner);
 
     // robot buff
     sentry_msgs::msg::RobotBuff robot_buffs_msgs;
-    // robot_buffs_msgs.robot_replenishing_blood = comm.rx_struct_slow_.; //
+    // robot_buffs_msgs.robot_replenishing_blood = comm.getRxStructSlow().; //
     // NOTE: unkonwn buff in 2024
     robot_buffs_msgs.shooter_cooling_acceleration =
-        comm.rx_struct_slow_.cooling_buff;
-    robot_buffs_msgs.robot_defense_bonus = comm.rx_struct_slow_.defence_buff;
-    robot_buffs_msgs.robot_attack_bonus = comm.rx_struct_slow_.attack_buff;
+        comm.getRxStructSlow().cooling_buff;
+    robot_buffs_msgs.robot_defense_bonus = comm.getRxStructSlow().defence_buff;
+    robot_buffs_msgs.robot_attack_bonus = comm.getRxStructSlow().attack_buff;
     RCLCPP_INFO(this->get_logger(), "Published robot buff: %d, %d, %d",
-                comm.rx_struct_slow_.cooling_buff,
-                comm.rx_struct_slow_.defence_buff,
-                comm.rx_struct_slow_.attack_buff);
+                comm.getRxStructSlow().cooling_buff,
+                comm.getRxStructSlow().defence_buff,
+                comm.getRxStructSlow().attack_buff);
 
     // robot position
     sentry_msgs::msg::RobotPosition robot_position_msgs;
-    robot_position_msgs.x = comm.rx_struct_slow_.x;
-    robot_position_msgs.y = comm.rx_struct_slow_.y;
+    robot_position_msgs.x = comm.getRxStructSlow().x;
+    robot_position_msgs.y = comm.getRxStructSlow().y;
     // robot_position_msgs.z = comm.rx_struct_slow // NOTE: z is not available
     // in 2024
-    robot_position_msgs.yaw = comm.rx_struct_slow_.angle;
+    robot_position_msgs.yaw = comm.getRxStructSlow().angle;
     _robot_position_pub_->publish(robot_position_msgs);
     RCLCPP_INFO(this->get_logger(), "Published robot position: %f, %f, %f",
-                comm.rx_struct_slow_.x, comm.rx_struct_slow_.y,
-                comm.rx_struct_slow_.angle);
+                comm.getRxStructSlow().x, comm.getRxStructSlow().y,
+                comm.getRxStructSlow().angle);
     // robot status
     sentry_msgs::msg::RobotStatus robot_status_msgs;
-    robot_status_msgs.robot_id = comm.rx_struct_slow_.robot_id;
-    robot_status_msgs.robot_level = comm.rx_struct_slow_.robot_level;
-    robot_status_msgs.remain_hp = comm.rx_struct_slow_.current_HP;
-    robot_status_msgs.max_hp = comm.rx_struct_slow_.maximum_HP;
+    robot_status_msgs.robot_id = comm.getRxStructSlow().robot_id;
+    robot_status_msgs.robot_level = comm.getRxStructSlow().robot_level;
+    robot_status_msgs.remain_hp = comm.getRxStructSlow().current_HP;
+    robot_status_msgs.max_hp = comm.getRxStructSlow().maximum_HP;
     robot_status_msgs.shooter_17mm_id1_cooling_rate =
-        comm.rx_struct_slow_.shooter_barrel_cooling_value;
+        comm.getRxStructSlow().shooter_barrel_cooling_value;
     robot_status_msgs.shooter_17mm_id1_cooling_limit =
-        comm.rx_struct_slow_.shooter_barrel_heat_limit;
+        comm.getRxStructSlow().shooter_barrel_heat_limit;
     // robot_status_msgs.shooter_17mm_id1_speed_limit =
-    //     comm.rx_struct_slow_. // NOTE: 2024 deprecated
+    //     comm.getRxStructSlow(). // NOTE: 2024 deprecated
     robot_status_msgs.shooter_17mm_id2_cooling_rate =
-        comm.rx_struct_slow_.shooter_barrel_cooling_value;
+        comm.getRxStructSlow().shooter_barrel_cooling_value;
     robot_status_msgs.shooter_17mm_id2_cooling_limit =
-        comm.rx_struct_slow_.shooter_barrel_heat_limit;
+        comm.getRxStructSlow().shooter_barrel_heat_limit;
     // robot_status_msgs.shooter_17mm_id2_speed_limit =
-    //     comm.rx_struct_slow_.; // NOTE: 2024 deprecated
+    //     comm.getRxStructSlow().; // NOTE: 2024 deprecated
     robot_status_msgs.chassis_power_limit =
-        comm.rx_struct_slow_.chassis_power_limit;
+        comm.getRxStructSlow().chassis_power_limit;
     robot_status_msgs.gimbal_power_output = // bool
-        comm.rx_struct_slow_.power_management_gimbal_output;
+        comm.getRxStructSlow().power_management_gimbal_output;
     robot_status_msgs.chassis_power_output = // bool
-        comm.rx_struct_slow_.power_management_chassis_output;
+        comm.getRxStructSlow().power_management_chassis_output;
     robot_status_msgs.shooter_power_output = // bool
-        comm.rx_struct_slow_.power_management_shooter_output;
+        comm.getRxStructSlow().power_management_shooter_output;
 
     // client command
     sentry_msgs::msg::ClientCommand client_command_msgs;
     client_command_msgs.target_position_x =
-        comm.rx_struct_slow_.command_target_position[0];
+        comm.getRxStructSlow().command_target_position[0];
     client_command_msgs.target_position_y =
-        comm.rx_struct_slow_.command_target_position[1];
+        comm.getRxStructSlow().command_target_position[1];
     client_command_msgs.target_position_z =
-        comm.rx_struct_slow_.command_target_position[2];
+        comm.getRxStructSlow().command_target_position[2];
     client_command_msgs.keyboard_key_pressed =
-        comm.rx_struct_slow_.keyboard_key_pressed;
+        comm.getRxStructSlow().keyboard_key_pressed;
     client_command_msgs.target_robot_id =
-        comm.rx_struct_slow_.command_target_robot_id;
+        comm.getRxStructSlow().command_target_robot_id;
     _client_command_pub_->publish(client_command_msgs);
     RCLCPP_INFO(this->get_logger(),
                 "Published client command: %f, %f, %f, %d, %d",
-                comm.rx_struct_slow_.command_target_position[0],
-                comm.rx_struct_slow_.command_target_position[1],
-                comm.rx_struct_slow_.command_target_position[2],
-                comm.rx_struct_slow_.keyboard_key_pressed,
-                comm.rx_struct_slow_.command_target_robot_id);
+                comm.getRxStructSlow().command_target_position[0],
+                comm.getRxStructSlow().command_target_position[1],
+                comm.getRxStructSlow().command_target_position[2],
+                comm.getRxStructSlow().keyboard_key_pressed,
+                comm.getRxStructSlow().command_target_robot_id);
 
     // client receive
     sentry_msgs::msg::ClientCommand client_receive_msgs;
     client_receive_msgs.target_position_x =
-        comm.rx_struct_slow_.receive_target_position[0];
+        comm.getRxStructSlow().receive_target_position[0];
     client_receive_msgs.target_position_y =
-        comm.rx_struct_slow_.receive_target_position[1];
+        comm.getRxStructSlow().receive_target_position[1];
     client_receive_msgs.target_robot_id =
-        comm.rx_struct_slow_.receive_target_robot_id;
+        comm.getRxStructSlow().receive_target_robot_id;
 
     RCLCPP_INFO(this->get_logger(), "Published client receive: %f, %f, %d",
-                comm.rx_struct_slow_.receive_target_position[0],
-                comm.rx_struct_slow_.receive_target_position[1],
-                comm.rx_struct_slow_.receive_target_robot_id);
+                comm.getRxStructSlow().receive_target_position[0],
+                comm.getRxStructSlow().receive_target_position[1],
+                comm.getRxStructSlow().receive_target_robot_id);
   }
 
   void tx_timer_callback() {
     TxPacket tx_packet;
 
-    comm.tx_struct_.header = 0x5A;
+    comm.setTxHeader(0x5A);
 
     // NOTE: comm.tx_struct_.yaw and pitch has been  updated in the
     // autoaim_sub_callback
-
-    float x_offset = 0.0985;
-    float y_offset = -0.013;
-
-    comm.tx_struct_.pitch_actual = comm.tx_struct_.pitch_angle + x_offset;
-    comm.tx_struct_.yaw_actual = comm.tx_struct_.yaw_angle + y_offset;
-    for (int i = 0; i < 4; i++) {
-      comm.tx_struct_.raw1[i] = 0;
-      comm.tx_struct_.raw2[i] = 0;
-    }
+    //
+    //
+    // NOTE: may be the pitch actual and yaw actual should be useless?
+    //
+    // comm.tx_struct_.pitch_actual = comm.tx_struct_.pitch_angle;
+    // comm.tx_struct_.yaw_actual = comm.tx_struct_.yaw_angle;
+    // for (int i = 0; i < 4; i++) {
+    //   comm.tx_struct_.raw1[i] = 0;
+    //   comm.tx_struct_.raw2[i] = 0;
+    // }
 
     // NOTE: comm.tx_struct_.linear_x, linear_y and angular_z has been updated
     // in the chassis_cmd_vel
@@ -385,22 +390,30 @@ public:
         this->get_logger(),
         "sending to C board: yaw: %.2f, pitch: %.2f, actual1: %.2f, actual2 "
         ":%.2f, linear_x: %.2f, linear_y: %.2f, angular_z: %.2f",
-        comm.tx_struct_.yaw_angle, comm.tx_struct_.pitch_angle,
-        comm.tx_struct_.pitch_actual, comm.tx_struct_.yaw_actual,
-        comm.tx_struct_.linear_x, comm.tx_struct_.linear_y,
-        comm.tx_struct_.angular_z);
+        comm.getTxStruct().yaw_angle, comm.getTxStruct().pitch_angle,
+        comm.getTxStruct().pitch_actual, comm.getTxStruct().yaw_actual,
+        comm.getTxStruct().linear_x, comm.getTxStruct().linear_y,
+        comm.getTxStruct().angular_z);
 
-    RCLCPP_INFO(this->get_logger(), "len: %ld", sizeof(comm.rx_struct_slow_));
-    RCLCPP_INFO(this->get_logger(), "len: %ld", sizeof(comm.rx_struct_fast_));
+    RCLCPP_INFO(this->get_logger(), "len: %ld", comm.getRxStructSlowSize());
+    RCLCPP_INFO(this->get_logger(), "len: %ld", comm.getRxStructFastSize());
 
-    memcpy(&tx_packet, &comm.tx_struct_, sizeof(CommPort::ProjectileTx));
+    memcpy(&tx_packet, &comm.getTxStruct(), comm.getTxStructSize());
 
-    comm.tx_struct_.checksum =
-        Crc8Append(&tx_packet, sizeof(CommPort::ProjectileTx));
-    comm.Write(&tx_packet, sizeof(CommPort::ProjectileTx), true);
+    comm.setTxChecksum(Crc8Append(&tx_packet, comm.getTxStructSize()));
+
+    comm.Write(&tx_packet, comm.getTxStructSize(), true);
   }
 
 private:
+  // the temp variables added to the new yaw and pitch
+  float temp_yaw = 0;
+  float temp_pitch = 0;
+
+  // the offset value of pitch and yaw
+  float pitch_offset = 0.0985;
+  float yaw_offset = -0.013;
+
   // publisher
   rclcpp::Publisher<geometry_msgs::msg::Quaternion>::SharedPtr quaternion_pub_;
   rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr _mode_pub_;

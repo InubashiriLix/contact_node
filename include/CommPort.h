@@ -40,7 +40,6 @@ private:
   std::vector<serial::PortInfo> serial_port_info_;
   std::string device_desc_;
 
-public:
   uint8_t tx_buffer_[64]{};  // TODO: bigger buffer?
   uint8_t rx_buffer_[256]{}; // TODO: BIGGer buffer?
 
@@ -178,6 +177,7 @@ public:
   ProjectileRx_fast rx_struct_fast_{};
   ProjectileRx_slow rx_struct_slow_{};
 
+public:
   enum SERIAL_MODE { TX_SYNC, TX_RX_ASYNC };
 
   CommPort();
@@ -201,6 +201,23 @@ public:
   void tx_struct_dump(uint8_t *tx_buffer);
 
   void SerialFailsafeCallback(bool reopen);
+
+  const ProjectileRx_fast &getRxStructFast() const;
+  const ProjectileRx_slow &getRxStructSlow() const;
+
+  void setTxHeader(uint8_t header);
+  void setTxYaw(float yaw);
+  void setTxPitch(float pitch);
+  void setTxLinearX(float linear_x);
+  void setTxLinearY(float linear_y);
+  void setTxAngularZ(float angular_z);
+  void setTxChecksum(uint8_t checksum);
+  void setTxTargetFound(uint8_t target_found);
+  const ProjectileTx &getTxStruct() const;
+
+  size_t getTxStructSize() const;
+  size_t getRxStructFastSize() const;
+  size_t getRxStructSlowSize() const;
 };
 
 #endif // ROBO_CV_COMMPORT_H

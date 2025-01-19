@@ -1,0 +1,17 @@
+[0.033s] Invoking command in '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact -- -j8 -l8
+[0.225s] [ 50%] Built target serial
+[0.279s] [35m[1mConsolidate compiler generated dependencies of target contact[0m
+[0.334s] [ 62%] [32mBuilding CXX object CMakeFiles/contact.dir/src/CommPort.cpp.o[0m
+[0.334s] [ 75%] [32mBuilding CXX object CMakeFiles/contact.dir/src/ContactNode.cpp.o[0m
+[1.400s] [01m[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/CommPort.cpp:[m[K In constructor ‘[01m[KCommPort::CommPort()[m[K’:
+[1.401s] [01m[K/home/orangepi/GM/nuc/GMaster_project/src/contact/src/CommPort.cpp:4:18:[m[K [01;35m[Kwarning: [m[KISO C++ forbids converting a string constant to ‘[01m[Kchar*[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wwrite-strings-Wwrite-strings]8;;[m[K]
+[1.401s]     4 |   char *device = [01;35m[K"/dev/ttyACM0"[m[K;
+[1.401s]       |                  [01;35m[K^~~~~~~~~~~~~~[m[K
+[29.619s] [ 87%] [32m[1mLinking CXX executable contact[0m
+[31.267s] /usr/bin/ld: CMakeFiles/contact.dir/src/ContactNode.cpp.o: in function `ContactNode::tx_timer_callback()':
+[31.267s] ContactNode.cpp:(.text._ZN11ContactNode17tx_timer_callbackEv[_ZN11ContactNode17tx_timer_callbackEv]+0x52c): undefined reference to `CommPort::setTxChecksum(unsigned char)'
+[31.456s] collect2: error: ld returned 1 exit status
+[31.459s] gmake[2]: *** [CMakeFiles/contact.dir/build.make:226: contact] Error 1
+[31.460s] gmake[1]: *** [CMakeFiles/Makefile2:154: CMakeFiles/contact.dir/all] Error 2
+[31.461s] gmake: *** [Makefile:146: all] Error 2
+[31.471s] Invoked command in '/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact -- -j8 -l8
