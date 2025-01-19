@@ -272,7 +272,7 @@ SITE:STRING=Inubashiri
 TinyXML2_DIR:PATH=TinyXML2_DIR-NOTFOUND
 
 //Path to a library.
-_lib:FILEPATH=/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/lib/libsentry_msgs__rosidl_typesupport_fastrtps_cpp.so
+_lib:FILEPATH=/root/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/lib/libsentry_msgs__rosidl_typesupport_fastrtps_cpp.so
 
 //The directory containing a CMake configuration file for ament_cmake.
 ament_cmake_DIR:PATH=/opt/ros/humble/share/ament_cmake/cmake
@@ -461,7 +461,7 @@ rosidl_typesupport_introspection_cpp_DIR:PATH=/opt/ros/humble/share/rosidl_types
 sensor_msgs_DIR:PATH=/opt/ros/humble/share/sensor_msgs/cmake
 
 //The directory containing a CMake configuration file for sentry_msgs.
-sentry_msgs_DIR:PATH=/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/share/sentry_msgs/cmake
+sentry_msgs_DIR:PATH=/root/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/share/sentry_msgs/cmake
 
 //Value Computed by CMake
 serial_BINARY_DIR:STATIC=/home/orangepi/GM/nuc/GMaster_project/src/contact/build/contact/serial/lib

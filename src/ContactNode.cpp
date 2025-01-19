@@ -101,6 +101,10 @@ public:
   }
 
   void autoaim_sub_callback(const sentry_msgs::msg::AutoAIM msg) {
+    // this flag is used to check if the autoaim has got its first message
+    // and since the callback function is called for the first time, the flag is
+    // setting to true
+    flag_autoaim_init = true;
     // update the temp pitch and yaw to the newest value
     temp_yaw = comm.getRxStructFast().yaw;
     temp_pitch = comm.getRxStructFast().pitch;
@@ -371,6 +375,28 @@ public:
 
     // NOTE: comm.tx_struct_.yaw and pitch has been  updated in the
     // autoaim_sub_callback
+    // NOTE: the only sence we need to watch out is that when the autoaim has
+    // not got its first message, the yaw and pitch are actually still 0 which
+    // means, if we dont't want the tobot's pitch and yaw to be 0, we need to
+    // set the pitch and yaw to the default value then, we can set the pitch and
+    // yaw to the angle that robot owns now
+    if (flag_autoaim_init == 0) {
+      if (comm.getRxStructFast().yaw == 0 &&
+          comm.getRxStructFast().pitch == 0) {
+        // NOTE:
+        // at this case, the rx msg has not arrived, so we should do nothing,
+        // even sending any msg to C borad
+        return;
+      } else {
+        // NOTE:
+        // at this case, the rx msg has arrived, so we can set the pitch and yaw
+        // to the default value (rx msg's yaw and pitch)
+        comm.setTxPitch(comm.getRxStructFast().pitch);
+        comm.setTxYaw(comm.getRxStructFast().yaw);
+      }
+    }
+    // else. the flag is 1, which means the autoaim msg has arrived, and we
+    // don't need to specify the pitch and yaw
     //
     //
     // NOTE: may be the pitch actual and yaw actual should be useless?
@@ -406,6 +432,8 @@ public:
   }
 
 private:
+  // this flag is used to check if the autoaim has got its first message
+  uint8_t flag_autoaim_init = 0;
   // the temp variables added to the new yaw and pitch
   float temp_yaw = 0;
   float temp_pitch = 0;

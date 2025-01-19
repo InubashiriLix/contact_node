@@ -54,7 +54,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/contact/contact")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/contact/contact"
-         OLD_RPATH "/opt/ros/humble/lib:/home/orangepi/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/lib:"
+         OLD_RPATH "/opt/ros/humble/lib:/root/GM/nuc/GMaster_project/src/sentry_msgs/install/sentry_msgs/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/contact/contact")
